@@ -1,0 +1,647 @@
+openapi: 3.1.0
+info:
+  title: Workday Procurement API
+  description: >-
+    API for purchase requisitions, purchase orders, supplier management,
+    and procurement processes within Workday Resource Management.
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday Procurement API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+servers:
+  - url: https://{tenant}.workday.com/api/procurement/v38.2
+    description: Workday Procurement Production
+    variables:
+      tenant:
+        description: Workday tenant identifier
+        default: your-tenant
+tags:
+  - name: Purchase Requisitions
+    description: Create and manage purchase requisitions
+  - name: Purchase Orders
+    description: Manage purchase orders
+  - name: Suppliers
+    description: Manage supplier records
+  - name: Supplier Contracts
+    description: Manage supplier contracts
+  - name: Receipts
+    description: Manage goods receipts
+security:
+  - bearerAuth: []
+paths:
+  /purchaseRequisitions:
+    get:
+      operationId: listPurchaseRequisitions
+      summary: List purchase requisitions
+      description: >-
+        Retrieve a collection of purchase requisitions.
+      tags:
+        - Purchase Requisitions
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter by requisition status
+          schema:
+            type: string
+            enum:
+              - Draft
+              - Submitted
+              - Approved
+              - Denied
+              - Canceled
+      responses:
+        '200':
+          description: Purchase requisitions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseRequisition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPurchaseRequisition
+      summary: Create a purchase requisition
+      description: >-
+        Submit a new purchase requisition for approval.
+      tags:
+        - Purchase Requisitions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseRequisitionCreate'
+      responses:
+        '201':
+          description: Purchase requisition created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseRequisition'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /purchaseRequisitions/{id}:
+    get:
+      operationId: getPurchaseRequisition
+      summary: Get a purchase requisition
+      description: >-
+        Retrieve details of a specific purchase requisition.
+      tags:
+        - Purchase Requisitions
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Purchase requisition details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseRequisition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /purchaseOrders:
+    get:
+      operationId: listPurchaseOrders
+      summary: List purchase orders
+      description: >-
+        Retrieve a collection of purchase orders.
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter by order status
+          schema:
+            type: string
+            enum:
+              - Draft
+              - Issued
+              - Received
+              - Closed
+              - Canceled
+      responses:
+        '200':
+          description: Purchase orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /purchaseOrders/{id}:
+    get:
+      operationId: getPurchaseOrder
+      summary: Get a purchase order
+      description: >-
+        Retrieve details of a specific purchase order.
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Purchase order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /purchaseOrders/{id}/lines:
+    get:
+      operationId: listPurchaseOrderLines
+      summary: List purchase order lines
+      description: >-
+        Retrieve line items for a specific purchase order.
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Purchase order lines retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseOrderLine'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /suppliers:
+    get:
+      operationId: listSuppliers
+      summary: List suppliers
+      description: >-
+        Retrieve a collection of suppliers.
+      tags:
+        - Suppliers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: active
+          in: query
+          description: Filter by active status
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Suppliers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Supplier'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /suppliers/{id}:
+    get:
+      operationId: getSupplier
+      summary: Get a supplier
+      description: >-
+        Retrieve details of a specific supplier.
+      tags:
+        - Suppliers
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Supplier details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /supplierContracts:
+    get:
+      operationId: listSupplierContracts
+      summary: List supplier contracts
+      description: >-
+        Retrieve a collection of supplier contracts.
+      tags:
+        - Supplier Contracts
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Supplier contracts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SupplierContract'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /supplierContracts/{id}:
+    get:
+      operationId: getSupplierContract
+      summary: Get a supplier contract
+      description: >-
+        Retrieve details of a specific supplier contract.
+      tags:
+        - Supplier Contracts
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Supplier contract details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierContract'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /goodsReceipts:
+    get:
+      operationId: listGoodsReceipts
+      summary: List goods receipts
+      description: >-
+        Retrieve a collection of goods receipts.
+      tags:
+        - Receipts
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Goods receipts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoodsReceipt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+    BadRequest:
+      description: The request was malformed or contained invalid data
+  schemas:
+    PurchaseRequisition:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the purchase requisition
+        requisitionNumber:
+          type: string
+          description: System-generated requisition number
+        requester:
+          $ref: '#/components/schemas/WorkerRef'
+        description:
+          type: string
+          description: Requisition description
+        totalAmount:
+          type: number
+          format: double
+          description: Total requisition amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        status:
+          type: string
+          enum:
+            - Draft
+            - Submitted
+            - Approved
+            - Denied
+            - Canceled
+          description: Current requisition status
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        createdOn:
+          type: string
+          format: date-time
+          description: When the requisition was created
+    PurchaseRequisitionCreate:
+      type: object
+      required:
+        - description
+        - company
+      properties:
+        description:
+          type: string
+          description: Requisition description
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequisitionLineCreate'
+          description: Requisition line items
+    RequisitionLineCreate:
+      type: object
+      required:
+        - description
+        - quantity
+        - unitCost
+      properties:
+        description:
+          type: string
+          description: Line item description
+        quantity:
+          type: number
+          format: double
+          description: Quantity requested
+        unitCost:
+          type: number
+          format: double
+          description: Cost per unit
+        supplier:
+          $ref: '#/components/schemas/SupplierShortRef'
+    PurchaseOrder:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the purchase order
+        orderNumber:
+          type: string
+          description: Purchase order number
+        supplier:
+          $ref: '#/components/schemas/SupplierShortRef'
+        orderDate:
+          type: string
+          format: date
+          description: Date the order was placed
+        totalAmount:
+          type: number
+          format: double
+          description: Total order amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        status:
+          type: string
+          enum:
+            - Draft
+            - Issued
+            - Received
+            - Closed
+            - Canceled
+          description: Current order status
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+    PurchaseOrderLine:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the line item
+        lineNumber:
+          type: integer
+          description: Line item number
+        description:
+          type: string
+          description: Line item description
+        quantity:
+          type: number
+          format: double
+          description: Quantity ordered
+        unitCost:
+          type: number
+          format: double
+          description: Cost per unit
+        extendedAmount:
+          type: number
+          format: double
+          description: Total line amount
+        spendCategory:
+          type: string
+          description: Spend category for the line item
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the supplier
+        supplierName:
+          type: string
+          description: Supplier business name
+        supplierReferenceId:
+          type: string
+          description: Supplier reference identifier
+        taxId:
+          type: string
+          description: Tax identification number
+        paymentTerms:
+          type: string
+          description: Default payment terms
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        active:
+          type: boolean
+          description: Whether the supplier is active
+        address:
+          $ref: '#/components/schemas/Address'
+    SupplierContract:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the supplier contract
+        contractNumber:
+          type: string
+          description: Contract reference number
+        supplier:
+          $ref: '#/components/schemas/SupplierShortRef'
+        startDate:
+          type: string
+          format: date
+          description: Contract start date
+        endDate:
+          type: string
+          format: date
+          description: Contract end date
+        totalAmount:
+          type: number
+          format: double
+          description: Total contract value
+        status:
+          type: string
+          enum:
+            - Draft
+            - Active
+            - Expired
+            - Canceled
+          description: Current contract status
+    GoodsReceipt:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the goods receipt
+        receiptNumber:
+          type: string
+          description: Goods receipt number
+        purchaseOrder:
+          $ref: '#/components/schemas/PurchaseOrderRef'
+        receiptDate:
+          type: string
+          format: date
+          description: Date goods were received
+        status:
+          type: string
+          enum:
+            - Received
+            - Partially Received
+            - Returned
+          description: Receipt status
+    Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          description: First line of the address
+        addressLine2:
+          type: string
+          description: Second line of the address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        postalCode:
+          type: string
+          description: Postal or ZIP code
+        country:
+          type: string
+          description: Country code
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    SupplierShortRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the supplier
+        descriptor:
+          type: string
+          description: Display name of the supplier
+    PurchaseOrderRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the purchase order
+        descriptor:
+          type: string
+          description: Display name of the purchase order

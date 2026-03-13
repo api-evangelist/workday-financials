@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-financials/supplier-invoice.json",
+  "title": "Workday Supplier Invoice",
+  "description": "A supplier invoice represents a billing document received from a supplier for goods or services, managed through the accounts payable process in Workday Financial Management.",
+  "type": "object",
+  "required": ["invoiceNumber", "supplier", "invoiceDate", "totalAmount"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) uniquely identifying the supplier invoice"
+    },
+    "invoiceNumber": {
+      "type": "string",
+      "description": "Supplier-provided invoice number",
+      "minLength": 1
+    },
+    "supplier": {
+      "$ref": "#/$defs/Reference",
+      "description": "Supplier who issued the invoice"
+    },
+    "invoiceDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date on the invoice"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment due date"
+    },
+    "totalAmount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total invoice amount"
+    },
+    "taxAmount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total tax amount on the invoice"
+    },
+    "currency": {
+      "$ref": "#/$defs/Reference",
+      "description": "Invoice currency"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Approved", "Paid", "Canceled"],
+      "description": "Current processing status of the invoice"
+    },
+    "company": {
+      "$ref": "#/$defs/Reference",
+      "description": "Company entity receiving the invoice"
+    },
+    "paymentTerms": {
+      "type": "string",
+      "description": "Payment terms applied to the invoice (e.g., Net 30)"
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/InvoiceLine"
+      },
+      "description": "Individual invoice line items"
+    },
+    "purchaseOrder": {
+      "$ref": "#/$defs/Reference",
+      "description": "Associated purchase order reference"
+    },
+    "approvedBy": {
+      "$ref": "#/$defs/Reference",
+      "description": "Worker who approved the invoice"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the invoice was created in Workday"
+    }
+  },
+  "$defs": {
+    "InvoiceLine": {
+      "type": "object",
+      "description": "An individual line item on a supplier invoice",
+      "properties": {
+        "lineNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Line item number"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the goods or services"
+        },
+        "quantity": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Quantity of items"
+        },
+        "unitCost": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Cost per unit"
+        },
+        "extendedAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total line amount"
+        },
+        "spendCategory": {
+          "type": "string",
+          "description": "Spend category for the line item"
+        },
+        "costCenter": {
+          "$ref": "#/$defs/Reference",
+          "description": "Cost center allocation"
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "description": "A reference to a related Workday resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Workday ID (WID) of the referenced resource"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the referenced resource"
+        }
+      }
+    }
+  }
+}

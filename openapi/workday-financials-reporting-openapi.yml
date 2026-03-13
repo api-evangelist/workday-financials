@@ -1,0 +1,414 @@
+openapi: 3.1.0
+info:
+  title: Workday Reporting API
+  description: >-
+    API for accessing financial reports, custom report execution, and analytics
+    data extraction using Workday Report as a Service (RaaS).
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday Reporting API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+servers:
+  - url: https://{tenant}.workday.com/api/reporting/v38.2
+    description: Workday Reporting Production
+    variables:
+      tenant:
+        description: Workday tenant identifier
+        default: your-tenant
+tags:
+  - name: Reports
+    description: Access and manage report definitions
+  - name: Report Execution
+    description: Execute reports and retrieve results
+  - name: Custom Reports
+    description: Manage custom report definitions
+  - name: Report Prompts
+    description: Manage report prompt values
+security:
+  - bearerAuth: []
+paths:
+  /reports:
+    get:
+      operationId: listReports
+      summary: List available reports
+      description: >-
+        Retrieve a collection of available report definitions.
+      tags:
+        - Reports
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: category
+          in: query
+          description: Filter by report category
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reports retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReportDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /reports/{id}:
+    get:
+      operationId: getReport
+      summary: Get a report definition
+      description: >-
+        Retrieve the definition and metadata for a specific report.
+      tags:
+        - Reports
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Report definition details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /reports/{id}/execute:
+    post:
+      operationId: executeReport
+      summary: Execute a report
+      description: >-
+        Execute a report with optional prompt values and retrieve results.
+      tags:
+        - Report Execution
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+        - name: format
+          in: query
+          description: Output format for the report
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+              - xml
+            default: json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExecutionRequest'
+      responses:
+        '200':
+          description: Report executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResult'
+            text/csv:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /reports/{id}/prompts:
+    get:
+      operationId: getReportPrompts
+      summary: Get report prompts
+      description: >-
+        Retrieve the prompt definitions for a specific report.
+      tags:
+        - Report Prompts
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Report prompts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReportPrompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customReports:
+    get:
+      operationId: listCustomReports
+      summary: List custom reports
+      description: >-
+        Retrieve a collection of custom report definitions.
+      tags:
+        - Custom Reports
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Custom reports retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomReport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customReports/{id}:
+    get:
+      operationId: getCustomReport
+      summary: Get a custom report
+      description: >-
+        Retrieve details of a specific custom report definition.
+      tags:
+        - Custom Reports
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Custom report details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomReport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customReports/{id}/execute:
+    post:
+      operationId: executeCustomReport
+      summary: Execute a custom report
+      description: >-
+        Execute a custom report with optional prompt values and retrieve results.
+      tags:
+        - Custom Reports
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+        - name: format
+          in: query
+          description: Output format for the report
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+              - xml
+            default: json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportExecutionRequest'
+      responses:
+        '200':
+          description: Custom report executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+    BadRequest:
+      description: The request was malformed or contained invalid data
+  schemas:
+    ReportDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the report
+        name:
+          type: string
+          description: Report name
+        description:
+          type: string
+          description: Report description
+        category:
+          type: string
+          description: Report category
+        outputFormat:
+          type: array
+          items:
+            type: string
+            enum:
+              - json
+              - csv
+              - xml
+          description: Supported output formats
+        hasPrompts:
+          type: boolean
+          description: Whether the report requires prompt values
+        owner:
+          $ref: '#/components/schemas/WorkerRef'
+    CustomReport:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the custom report
+        name:
+          type: string
+          description: Custom report name
+        description:
+          type: string
+          description: Custom report description
+        dataSource:
+          type: string
+          description: Data source for the report
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportColumn'
+          description: Report columns
+        owner:
+          $ref: '#/components/schemas/WorkerRef'
+        createdOn:
+          type: string
+          format: date-time
+          description: When the custom report was created
+    ReportColumn:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        label:
+          type: string
+          description: Column display label
+        dataType:
+          type: string
+          enum:
+            - text
+            - numeric
+            - date
+            - boolean
+            - currency
+          description: Data type of the column
+    ReportPrompt:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Prompt parameter name
+        label:
+          type: string
+          description: Prompt display label
+        required:
+          type: boolean
+          description: Whether the prompt is required
+        dataType:
+          type: string
+          description: Expected data type for the prompt value
+        defaultValue:
+          type: string
+          description: Default value for the prompt
+    ReportExecutionRequest:
+      type: object
+      properties:
+        prompts:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs of prompt parameter names and values
+    ReportResult:
+      type: object
+      properties:
+        reportName:
+          type: string
+          description: Name of the executed report
+        executedOn:
+          type: string
+          format: date-time
+          description: When the report was executed
+        totalRows:
+          type: integer
+          description: Total number of rows in the result
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportColumn'
+          description: Column definitions
+        rows:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Report data rows
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker

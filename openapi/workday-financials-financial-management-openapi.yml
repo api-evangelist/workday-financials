@@ -1,0 +1,749 @@
+openapi: 3.1.0
+info:
+  title: Workday Financial Management API
+  description: >-
+    Core API for managing financial transactions, general ledger, accounts
+    payable, accounts receivable, and financial reporting within Workday
+    Financial Management.
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday Financial Management API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+servers:
+  - url: https://{tenant}.workday.com/api/financialManagement/v38.2
+    description: Workday Financial Management Production
+    variables:
+      tenant:
+        description: Workday tenant identifier
+        default: your-tenant
+tags:
+  - name: Ledger Accounts
+    description: Manage general ledger accounts and chart of accounts
+  - name: Journal Entries
+    description: Create and manage journal entries
+  - name: Accounting Journals
+    description: Access and manage accounting journals
+  - name: Accounts Payable
+    description: Manage supplier invoices and payment processing
+  - name: Accounts Receivable
+    description: Manage customer invoices and receivables
+  - name: Financial Reports
+    description: Access and generate financial reports
+  - name: Companies
+    description: Manage company entities within the financial system
+  - name: Cost Centers
+    description: Manage cost centers for financial allocation
+security:
+  - bearerAuth: []
+paths:
+  /ledgerAccounts:
+    get:
+      operationId: listLedgerAccounts
+      summary: List ledger accounts
+      description: >-
+        Retrieve a collection of ledger accounts from the chart of accounts.
+      tags:
+        - Ledger Accounts
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Ledger accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of results
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LedgerAccount'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ledgerAccounts/{id}:
+    get:
+      operationId: getLedgerAccount
+      summary: Get a ledger account
+      description: >-
+        Retrieve details of a specific ledger account by its unique identifier.
+      tags:
+        - Ledger Accounts
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Ledger account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LedgerAccount'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /journalEntries:
+    get:
+      operationId: listJournalEntries
+      summary: List journal entries
+      description: >-
+        Retrieve a collection of journal entries with optional filtering.
+      tags:
+        - Journal Entries
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: fromDate
+          in: query
+          description: Filter entries from this date (inclusive)
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: Filter entries to this date (inclusive)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Journal entries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JournalEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createJournalEntry
+      summary: Create a journal entry
+      description: >-
+        Create a new journal entry in the general ledger.
+      tags:
+        - Journal Entries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalEntryCreate'
+      responses:
+        '201':
+          description: Journal entry created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalEntry'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /journalEntries/{id}:
+    get:
+      operationId: getJournalEntry
+      summary: Get a journal entry
+      description: >-
+        Retrieve details of a specific journal entry.
+      tags:
+        - Journal Entries
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Journal entry details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accountingJournals:
+    get:
+      operationId: listAccountingJournals
+      summary: List accounting journals
+      description: >-
+        Retrieve a collection of accounting journals.
+      tags:
+        - Accounting Journals
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Accounting journals retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountingJournal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /supplierInvoices:
+    get:
+      operationId: listSupplierInvoices
+      summary: List supplier invoices
+      description: >-
+        Retrieve a collection of supplier invoices for accounts payable.
+      tags:
+        - Accounts Payable
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter invoices by status
+          schema:
+            type: string
+            enum:
+              - Draft
+              - Approved
+              - Paid
+              - Canceled
+      responses:
+        '200':
+          description: Supplier invoices retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SupplierInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /supplierInvoices/{id}:
+    get:
+      operationId: getSupplierInvoice
+      summary: Get a supplier invoice
+      description: >-
+        Retrieve details of a specific supplier invoice.
+      tags:
+        - Accounts Payable
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Supplier invoice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customerInvoices:
+    get:
+      operationId: listCustomerInvoices
+      summary: List customer invoices
+      description: >-
+        Retrieve a collection of customer invoices for accounts receivable.
+      tags:
+        - Accounts Receivable
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter invoices by status
+          schema:
+            type: string
+            enum:
+              - Draft
+              - Approved
+              - Paid
+              - Overdue
+              - Canceled
+      responses:
+        '200':
+          description: Customer invoices retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomerInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customerInvoices/{id}:
+    get:
+      operationId: getCustomerInvoice
+      summary: Get a customer invoice
+      description: >-
+        Retrieve details of a specific customer invoice.
+      tags:
+        - Accounts Receivable
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Customer invoice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies:
+    get:
+      operationId: listCompanies
+      summary: List companies
+      description: >-
+        Retrieve a collection of company entities.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Companies retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies/{id}:
+    get:
+      operationId: getCompany
+      summary: Get a company
+      description: >-
+        Retrieve details of a specific company entity.
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Company details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /costCenters:
+    get:
+      operationId: listCostCenters
+      summary: List cost centers
+      description: >-
+        Retrieve a collection of cost centers.
+      tags:
+        - Cost Centers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Cost centers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CostCenter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /costCenters/{id}:
+    get:
+      operationId: getCostCenter
+      summary: Get a cost center
+      description: >-
+        Retrieve details of a specific cost center.
+      tags:
+        - Cost Centers
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Cost center details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCenter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+    BadRequest:
+      description: The request was malformed or contained invalid data
+  schemas:
+    LedgerAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the ledger account
+        accountNumber:
+          type: string
+          description: Account number in the chart of accounts
+        accountName:
+          type: string
+          description: Display name of the ledger account
+        accountType:
+          type: string
+          enum:
+            - Asset
+            - Liability
+            - Equity
+            - Revenue
+            - Expense
+          description: Classification type of the account
+        active:
+          type: boolean
+          description: Whether the account is currently active
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+    JournalEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the journal entry
+        journalNumber:
+          type: string
+          description: System-generated journal entry number
+        journalDate:
+          type: string
+          format: date
+          description: Date of the journal entry
+        description:
+          type: string
+          description: Description of the journal entry
+        status:
+          type: string
+          enum:
+            - Draft
+            - Submitted
+            - Approved
+            - Posted
+            - Reversed
+          description: Current status of the journal entry
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        totalDebit:
+          type: number
+          format: double
+          description: Total debit amount
+        totalCredit:
+          type: number
+          format: double
+          description: Total credit amount
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/JournalLine'
+          description: Individual journal entry lines
+        createdOn:
+          type: string
+          format: date-time
+          description: When the journal entry was created
+    JournalEntryCreate:
+      type: object
+      required:
+        - journalDate
+        - company
+        - lines
+      properties:
+        journalDate:
+          type: string
+          format: date
+          description: Date of the journal entry
+        description:
+          type: string
+          description: Description of the journal entry
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/JournalLine'
+          minItems: 2
+          description: Journal entry lines (minimum two for debit/credit)
+    JournalLine:
+      type: object
+      properties:
+        ledgerAccount:
+          $ref: '#/components/schemas/LedgerAccountRef'
+        debitAmount:
+          type: number
+          format: double
+          description: Debit amount for this line
+        creditAmount:
+          type: number
+          format: double
+          description: Credit amount for this line
+        memo:
+          type: string
+          description: Line-level memo
+        costCenter:
+          $ref: '#/components/schemas/CostCenterRef'
+    AccountingJournal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the accounting journal
+        name:
+          type: string
+          description: Name of the accounting journal
+        journalType:
+          type: string
+          description: Type of accounting journal
+        active:
+          type: boolean
+          description: Whether the journal is active
+    SupplierInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the supplier invoice
+        invoiceNumber:
+          type: string
+          description: Invoice number
+        supplier:
+          $ref: '#/components/schemas/SupplierRef'
+        invoiceDate:
+          type: string
+          format: date
+          description: Date on the invoice
+        dueDate:
+          type: string
+          format: date
+          description: Payment due date
+        totalAmount:
+          type: number
+          format: double
+          description: Total invoice amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        status:
+          type: string
+          enum:
+            - Draft
+            - Approved
+            - Paid
+            - Canceled
+          description: Current invoice status
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+    CustomerInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the customer invoice
+        invoiceNumber:
+          type: string
+          description: Invoice number
+        customer:
+          $ref: '#/components/schemas/CustomerRef'
+        invoiceDate:
+          type: string
+          format: date
+          description: Date on the invoice
+        dueDate:
+          type: string
+          format: date
+          description: Payment due date
+        totalAmount:
+          type: number
+          format: double
+          description: Total invoice amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        status:
+          type: string
+          enum:
+            - Draft
+            - Approved
+            - Paid
+            - Overdue
+            - Canceled
+          description: Current invoice status
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the company
+        name:
+          type: string
+          description: Company name
+        organizationCode:
+          type: string
+          description: Organization reference code
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        active:
+          type: boolean
+          description: Whether the company is active
+    CostCenter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the cost center
+        name:
+          type: string
+          description: Cost center name
+        code:
+          type: string
+          description: Cost center reference code
+        active:
+          type: boolean
+          description: Whether the cost center is active
+        manager:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+          description: Cost center manager reference
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    LedgerAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the ledger account
+        descriptor:
+          type: string
+          description: Display name of the ledger account
+    CostCenterRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the cost center
+        descriptor:
+          type: string
+          description: Display name of the cost center
+    SupplierRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the supplier
+        descriptor:
+          type: string
+          description: Display name of the supplier
+    CustomerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the customer
+        descriptor:
+          type: string
+          description: Display name of the customer

@@ -1,0 +1,235 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "workday": "https://community.workday.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "JournalEntry": {
+      "@id": "workday:JournalEntry",
+      "@context": {
+        "journalNumber": "workday:journalNumber",
+        "journalDate": {
+          "@id": "workday:journalDate",
+          "@type": "xsd:date"
+        },
+        "description": "schema:description",
+        "status": "workday:status",
+        "totalDebit": {
+          "@id": "workday:totalDebit",
+          "@type": "xsd:decimal"
+        },
+        "totalCredit": {
+          "@id": "workday:totalCredit",
+          "@type": "xsd:decimal"
+        },
+        "createdOn": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "LedgerAccount": {
+      "@id": "workday:LedgerAccount",
+      "@context": {
+        "accountNumber": "workday:accountNumber",
+        "accountName": "schema:name",
+        "accountType": "workday:accountType",
+        "active": {
+          "@id": "workday:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "SupplierInvoice": {
+      "@id": "workday:SupplierInvoice",
+      "@context": {
+        "invoiceNumber": "workday:invoiceNumber",
+        "invoiceDate": {
+          "@id": "workday:invoiceDate",
+          "@type": "xsd:date"
+        },
+        "dueDate": {
+          "@id": "workday:dueDate",
+          "@type": "xsd:date"
+        },
+        "totalAmount": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": "workday:status"
+      }
+    },
+
+    "CustomerInvoice": {
+      "@id": "workday:CustomerInvoice",
+      "@context": {
+        "invoiceNumber": "workday:invoiceNumber",
+        "invoiceDate": {
+          "@id": "workday:invoiceDate",
+          "@type": "xsd:date"
+        },
+        "dueDate": {
+          "@id": "workday:dueDate",
+          "@type": "xsd:date"
+        },
+        "totalAmount": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": "workday:status"
+      }
+    },
+
+    "ExpenseReport": {
+      "@id": "workday:ExpenseReport",
+      "@context": {
+        "reportNumber": "workday:reportNumber",
+        "memo": "schema:description",
+        "expenseDate": {
+          "@id": "workday:expenseDate",
+          "@type": "xsd:date"
+        },
+        "totalAmount": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": "workday:status",
+        "createdOn": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "PurchaseOrder": {
+      "@id": "workday:PurchaseOrder",
+      "@context": {
+        "orderNumber": "workday:orderNumber",
+        "orderDate": {
+          "@id": "workday:orderDate",
+          "@type": "xsd:date"
+        },
+        "totalAmount": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": "workday:status"
+      }
+    },
+
+    "PurchaseRequisition": {
+      "@id": "workday:PurchaseRequisition",
+      "@context": {
+        "requisitionNumber": "workday:requisitionNumber",
+        "description": "schema:description",
+        "totalAmount": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": "workday:status",
+        "createdOn": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Supplier": {
+      "@id": "workday:Supplier",
+      "@context": {
+        "supplierName": "schema:name",
+        "supplierReferenceId": "workday:supplierReferenceId",
+        "taxId": "workday:taxId",
+        "paymentTerms": "workday:paymentTerms",
+        "active": {
+          "@id": "workday:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "BankAccount": {
+      "@id": "workday:BankAccount",
+      "@context": {
+        "accountName": "schema:name",
+        "accountNumber": "workday:accountNumber",
+        "bankName": "workday:bankName",
+        "accountType": "workday:accountType",
+        "currentBalance": {
+          "@id": "workday:currentBalance",
+          "@type": "xsd:decimal"
+        },
+        "active": {
+          "@id": "workday:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "RevenueContract": {
+      "@id": "workday:RevenueContract",
+      "@context": {
+        "contractNumber": "workday:contractNumber",
+        "startDate": {
+          "@id": "workday:startDate",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "workday:endDate",
+          "@type": "xsd:date"
+        },
+        "totalContractValue": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": "workday:status",
+        "revenueRecognitionStandard": "workday:revenueRecognitionStandard"
+      }
+    },
+
+    "Company": {
+      "@id": "workday:Company",
+      "@context": {
+        "name": "schema:name",
+        "organizationCode": "workday:organizationCode",
+        "active": {
+          "@id": "workday:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "CostCenter": {
+      "@id": "workday:CostCenter",
+      "@context": {
+        "name": "schema:name",
+        "code": "workday:code",
+        "active": {
+          "@id": "workday:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "AccountingPeriod": {
+      "@id": "workday:AccountingPeriod",
+      "@context": {
+        "name": "schema:name",
+        "startDate": {
+          "@id": "workday:startDate",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "workday:endDate",
+          "@type": "xsd:date"
+        },
+        "status": "workday:status",
+        "fiscalYear": "workday:fiscalYear"
+      }
+    }
+  }
+}

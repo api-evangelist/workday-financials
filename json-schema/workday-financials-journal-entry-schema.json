@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-financials/journal-entry.json",
+  "title": "Workday Journal Entry",
+  "description": "A journal entry records financial transactions in the general ledger, consisting of balanced debit and credit lines posted to specific ledger accounts within a Workday Financial Management system.",
+  "type": "object",
+  "required": ["journalDate", "company", "lines"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) uniquely identifying the journal entry"
+    },
+    "journalNumber": {
+      "type": "string",
+      "description": "System-generated journal entry number"
+    },
+    "journalDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the journal entry"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descriptive memo for the journal entry"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Submitted", "Approved", "Posted", "Reversed"],
+      "description": "Current lifecycle status of the journal entry"
+    },
+    "journalSource": {
+      "type": "string",
+      "description": "Source system or process that created the journal entry"
+    },
+    "company": {
+      "$ref": "#/$defs/Reference",
+      "description": "Company entity associated with the journal entry"
+    },
+    "currency": {
+      "$ref": "#/$defs/Reference",
+      "description": "Transaction currency"
+    },
+    "accountingPeriod": {
+      "$ref": "#/$defs/Reference",
+      "description": "Accounting period for the journal entry"
+    },
+    "totalDebit": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total debit amount across all lines"
+    },
+    "totalCredit": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total credit amount across all lines"
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/JournalLine"
+      },
+      "description": "Individual journal entry lines (minimum two required for balanced entry)"
+    },
+    "createdBy": {
+      "$ref": "#/$defs/Reference",
+      "description": "Worker who created the journal entry"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the journal entry was created"
+    }
+  },
+  "$defs": {
+    "JournalLine": {
+      "type": "object",
+      "description": "An individual line within a journal entry representing a debit or credit to a ledger account",
+      "properties": {
+        "ledgerAccount": {
+          "$ref": "#/$defs/Reference",
+          "description": "Ledger account for this line"
+        },
+        "debitAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Debit amount for this line"
+        },
+        "creditAmount": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Credit amount for this line"
+        },
+        "memo": {
+          "type": "string",
+          "description": "Line-level memo"
+        },
+        "costCenter": {
+          "$ref": "#/$defs/Reference",
+          "description": "Cost center allocation for this line"
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "description": "A reference to a related Workday resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Workday ID (WID) of the referenced resource"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the referenced resource"
+        }
+      }
+    }
+  }
+}

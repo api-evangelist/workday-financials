@@ -1,0 +1,684 @@
+openapi: 3.1.0
+info:
+  title: Workday Financial Accounting API
+  description: >-
+    API for journal entries, account reconciliation, period close activities,
+    and audit trails within Workday Financial Accounting.
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday Financial Accounting API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+servers:
+  - url: https://{tenant}.workday.com/api/financialAccounting/v38.2
+    description: Workday Financial Accounting Production
+    variables:
+      tenant:
+        description: Workday tenant identifier
+        default: your-tenant
+tags:
+  - name: Journal Entries
+    description: Create and manage journal entries
+  - name: Account Reconciliations
+    description: Manage account reconciliation processes
+  - name: Accounting Periods
+    description: Manage accounting periods and period close
+  - name: Audit Logs
+    description: Access financial audit trail data
+  - name: Trial Balances
+    description: Access trial balance data
+security:
+  - bearerAuth: []
+paths:
+  /journalEntries:
+    get:
+      operationId: listJournalEntries
+      summary: List journal entries
+      description: >-
+        Retrieve a collection of journal entries.
+      tags:
+        - Journal Entries
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter by journal entry status
+          schema:
+            type: string
+            enum:
+              - Draft
+              - Submitted
+              - Approved
+              - Posted
+              - Reversed
+        - name: fromDate
+          in: query
+          description: Filter entries from this date
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: Filter entries to this date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Journal entries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JournalEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createJournalEntry
+      summary: Create a journal entry
+      description: >-
+        Create a new journal entry for financial accounting.
+      tags:
+        - Journal Entries
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalEntryCreate'
+      responses:
+        '201':
+          description: Journal entry created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalEntry'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /journalEntries/{id}:
+    get:
+      operationId: getJournalEntry
+      summary: Get a journal entry
+      description: >-
+        Retrieve details of a specific journal entry.
+      tags:
+        - Journal Entries
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Journal entry details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /journalEntries/{id}/post:
+    post:
+      operationId: postJournalEntry
+      summary: Post a journal entry
+      description: >-
+        Post an approved journal entry to the general ledger.
+      tags:
+        - Journal Entries
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Journal entry posted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Journal entry is not in a valid state for posting
+  /journalEntries/{id}/reverse:
+    post:
+      operationId: reverseJournalEntry
+      summary: Reverse a journal entry
+      description: >-
+        Create a reversal of a posted journal entry.
+      tags:
+        - Journal Entries
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reversalDate:
+                  type: string
+                  format: date
+                  description: Date for the reversal entry
+      responses:
+        '201':
+          description: Journal entry reversed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accountReconciliations:
+    get:
+      operationId: listAccountReconciliations
+      summary: List account reconciliations
+      description: >-
+        Retrieve a collection of account reconciliations.
+      tags:
+        - Account Reconciliations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter by reconciliation status
+          schema:
+            type: string
+            enum:
+              - InProgress
+              - Completed
+              - Approved
+      responses:
+        '200':
+          description: Account reconciliations retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountReconciliation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accountReconciliations/{id}:
+    get:
+      operationId: getAccountReconciliation
+      summary: Get an account reconciliation
+      description: >-
+        Retrieve details of a specific account reconciliation.
+      tags:
+        - Account Reconciliations
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Account reconciliation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountReconciliation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accountingPeriods:
+    get:
+      operationId: listAccountingPeriods
+      summary: List accounting periods
+      description: >-
+        Retrieve a collection of accounting periods.
+      tags:
+        - Accounting Periods
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Accounting periods retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountingPeriod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accountingPeriods/{id}:
+    get:
+      operationId: getAccountingPeriod
+      summary: Get an accounting period
+      description: >-
+        Retrieve details of a specific accounting period.
+      tags:
+        - Accounting Periods
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Accounting period details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountingPeriod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /accountingPeriods/{id}/close:
+    post:
+      operationId: closeAccountingPeriod
+      summary: Close an accounting period
+      description: >-
+        Close an open accounting period, preventing further postings.
+      tags:
+        - Accounting Periods
+      parameters:
+        - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Accounting period closed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Period is not in a valid state for closing
+  /auditLogs:
+    get:
+      operationId: listAuditLogs
+      summary: List audit logs
+      description: >-
+        Retrieve financial audit trail entries.
+      tags:
+        - Audit Logs
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: fromDate
+          in: query
+          description: Filter logs from this date
+          schema:
+            type: string
+            format: date-time
+        - name: toDate
+          in: query
+          description: Filter logs to this date
+          schema:
+            type: string
+            format: date-time
+        - name: eventType
+          in: query
+          description: Filter by event type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit logs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditLogEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /trialBalances:
+    get:
+      operationId: listTrialBalances
+      summary: List trial balances
+      description: >-
+        Retrieve trial balance data for specified periods.
+      tags:
+        - Trial Balances
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: period
+          in: query
+          description: Accounting period identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trial balances retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrialBalanceEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+    BadRequest:
+      description: The request was malformed or contained invalid data
+  schemas:
+    JournalEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the journal entry
+        journalNumber:
+          type: string
+          description: System-generated journal entry number
+        journalDate:
+          type: string
+          format: date
+          description: Date of the journal entry
+        description:
+          type: string
+          description: Description of the journal entry
+        status:
+          type: string
+          enum:
+            - Draft
+            - Submitted
+            - Approved
+            - Posted
+            - Reversed
+          description: Current status of the journal entry
+        journalSource:
+          type: string
+          description: Source of the journal entry
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        totalDebit:
+          type: number
+          format: double
+          description: Total debit amount
+        totalCredit:
+          type: number
+          format: double
+          description: Total credit amount
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/JournalLine'
+        accountingPeriod:
+          $ref: '#/components/schemas/PeriodRef'
+        createdBy:
+          $ref: '#/components/schemas/WorkerRef'
+        createdOn:
+          type: string
+          format: date-time
+          description: When the journal entry was created
+    JournalEntryCreate:
+      type: object
+      required:
+        - journalDate
+        - company
+        - lines
+      properties:
+        journalDate:
+          type: string
+          format: date
+          description: Date of the journal entry
+        description:
+          type: string
+          description: Description of the journal entry
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/JournalLine'
+          minItems: 2
+          description: Journal entry lines (minimum two for debit/credit)
+    JournalLine:
+      type: object
+      properties:
+        ledgerAccount:
+          $ref: '#/components/schemas/LedgerAccountRef'
+        debitAmount:
+          type: number
+          format: double
+          description: Debit amount for this line
+        creditAmount:
+          type: number
+          format: double
+          description: Credit amount for this line
+        memo:
+          type: string
+          description: Line-level memo
+        costCenter:
+          $ref: '#/components/schemas/CostCenterRef'
+    AccountReconciliation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the reconciliation
+        ledgerAccount:
+          $ref: '#/components/schemas/LedgerAccountRef'
+        reconciliationDate:
+          type: string
+          format: date
+          description: Date of the reconciliation
+        beginningBalance:
+          type: number
+          format: double
+          description: Beginning balance
+        endingBalance:
+          type: number
+          format: double
+          description: Ending balance
+        variance:
+          type: number
+          format: double
+          description: Variance amount
+        status:
+          type: string
+          enum:
+            - InProgress
+            - Completed
+            - Approved
+          description: Reconciliation status
+        preparedBy:
+          $ref: '#/components/schemas/WorkerRef'
+        approvedBy:
+          $ref: '#/components/schemas/WorkerRef'
+    AccountingPeriod:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the accounting period
+        name:
+          type: string
+          description: Period name (e.g., January 2026)
+        startDate:
+          type: string
+          format: date
+          description: Period start date
+        endDate:
+          type: string
+          format: date
+          description: Period end date
+        status:
+          type: string
+          enum:
+            - Open
+            - Closed
+            - Locked
+          description: Period status
+        fiscalYear:
+          type: string
+          description: Fiscal year reference
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+    AuditLogEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the audit log entry
+        eventType:
+          type: string
+          description: Type of audit event
+        eventDate:
+          type: string
+          format: date-time
+          description: When the event occurred
+        user:
+          $ref: '#/components/schemas/WorkerRef'
+        resourceType:
+          type: string
+          description: Type of resource affected
+        resourceId:
+          type: string
+          description: ID of the affected resource
+        description:
+          type: string
+          description: Description of the audit event
+        previousValue:
+          type: string
+          description: Previous value (for change events)
+        newValue:
+          type: string
+          description: New value (for change events)
+    TrialBalanceEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the trial balance entry
+        ledgerAccount:
+          $ref: '#/components/schemas/LedgerAccountRef'
+        accountingPeriod:
+          $ref: '#/components/schemas/PeriodRef'
+        debitBalance:
+          type: number
+          format: double
+          description: Debit balance amount
+        creditBalance:
+          type: number
+          format: double
+          description: Credit balance amount
+        netBalance:
+          type: number
+          format: double
+          description: Net balance amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    LedgerAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the ledger account
+        descriptor:
+          type: string
+          description: Display name of the ledger account
+    CostCenterRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the cost center
+        descriptor:
+          type: string
+          description: Display name of the cost center
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
+    PeriodRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the accounting period
+        descriptor:
+          type: string
+          description: Display name of the period

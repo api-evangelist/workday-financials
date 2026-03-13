@@ -9,7 +9,7 @@ tags:
 - Expenses
 - Revenue Management
 created: '2024'
-modified: '2024'
+modified: '2026-03-04'
 url: https://www.workday.com/en-us/products/financial-management/overview.html
 apis:
 - name: Workday Financial Management API
@@ -29,6 +29,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
   - type: Authentication
     url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+  - type: OpenAPI
+    url: openapi/workday-financials-financial-management-openapi.yml
 - name: Workday Revenue Management API
   description: API for managing revenue recognition, contracts, billing, and revenue accounting in compliance with ASC 606 and IFRS 15.
   image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
@@ -44,6 +46,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
   - type: OpenAPI
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Revenue_Management/v38.2/Revenue_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-revenue-management-openapi.yml
 - name: Workday Expenses API
   description: API for expense report submission, approval workflows, receipt management, and expense policy enforcement.
   image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
@@ -59,6 +63,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
   - type: OpenAPI
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Expenses/v38.2/Expenses.json
+  - type: OpenAPI
+    url: openapi/workday-financials-expenses-openapi.yml
 - name: Workday Procurement API
   description: API for purchase requisitions, purchase orders, supplier management, and procurement processes.
   image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
@@ -74,6 +80,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
   - type: OpenAPI
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Resource_Management/v38.2/Resource_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-procurement-openapi.yml
 - name: Workday Cash Management API
   description: API for managing cash positions, bank accounts, transactions, and cash forecasting.
   image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
@@ -89,6 +97,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
   - type: OpenAPI
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Cash_Management/v38.2/Cash_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-cash-management-openapi.yml
 - name: Workday Financial Accounting API
   description: API for journal entries, account reconciliation, period close activities, and audit trails.
   image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
@@ -104,6 +114,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
   - type: OpenAPI
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-financial-accounting-openapi.yml
 - name: Workday Reporting API
   description: API for accessing financial reports, custom report execution, and analytics data extraction.
   image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
@@ -119,6 +131,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
   - type: OpenAPI
     url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Report_as_a_Service/v38.2/Report_as_a_Service.json
+  - type: OpenAPI
+    url: openapi/workday-financials-reporting-openapi.yml
 common:
 - type: Developer Portal
   url: https://community.workday.com/developer
@@ -136,7 +150,12 @@ common:
   url: https://www.workday.com/en-us/privacy.html
 - type: Contact
   url: https://www.workday.com/en-us/company/latest/contact-us.html
+- type: JSON-LD
+  url: json-ld/workday-financials-context.jsonld
+- type: JSONSchema
+  url: json-schema/workday-financials-journal-entry-schema.json
+- type: JSONSchema
+  url: json-schema/workday-financials-supplier-invoice-schema.json
 maintainers:
-- FN: Workday API Team
-  email: developer-support@workday.com
-  url: https://community.workday.com/developer
+- FN: Kin Lane
+  email: kin@apievangelist.com
