@@ -1,16 +1,17 @@
+aid: workday-financials
 name: Workday Financials
 description: Workday Financials is a cloud-based financial management system that provides comprehensive solutions for accounting, procurement, expenses, and financial reporting.
-image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Financial Management
-- Cloud ERP
-- Accounting
-- Procurement
-- Expenses
-- Revenue Management
-created: '2024'
-modified: '2026-03-04'
-url: https://www.workday.com/en-us/products/financial-management/overview.html
+  - Financial Management
+  - Cloud ERP
+  - Accounting
+  - Procurement
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/workday-financials/refs/heads/main/apis.yml
 apis:
 - name: Workday Financial Management API
   description: Core API for managing financial transactions, general ledger, accounts payable, accounts receivable, and financial reporting.
