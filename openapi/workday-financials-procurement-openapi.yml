@@ -20,16 +20,16 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Purchase Requisitions
-    description: Create and manage purchase requisitions
   - name: Purchase Orders
     description: Manage purchase orders
-  - name: Suppliers
-    description: Manage supplier records
-  - name: Supplier Contracts
-    description: Manage supplier contracts
+  - name: Purchase Requisitions
+    description: Create and manage purchase requisitions
   - name: Receipts
     description: Manage goods receipts
+  - name: Supplier Contracts
+    description: Manage supplier contracts
+  - name: Suppliers
+    description: Manage supplier records
 security:
   - bearerAuth: []
 paths:

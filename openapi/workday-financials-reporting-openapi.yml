@@ -20,14 +20,14 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Reports
-    description: Access and manage report definitions
-  - name: Report Execution
-    description: Execute reports and retrieve results
   - name: Custom Reports
     description: Manage custom report definitions
+  - name: Report Execution
+    description: Execute reports and retrieve results
   - name: Report Prompts
     description: Manage report prompt values
+  - name: Reports
+    description: Access and manage report definitions
 security:
   - bearerAuth: []
 paths:

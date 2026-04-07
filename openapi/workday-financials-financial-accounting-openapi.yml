@@ -20,14 +20,14 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Journal Entries
-    description: Create and manage journal entries
   - name: Account Reconciliations
     description: Manage account reconciliation processes
   - name: Accounting Periods
     description: Manage accounting periods and period close
   - name: Audit Logs
     description: Access financial audit trail data
+  - name: Journal Entries
+    description: Create and manage journal entries
   - name: Trial Balances
     description: Access trial balance data
 security:

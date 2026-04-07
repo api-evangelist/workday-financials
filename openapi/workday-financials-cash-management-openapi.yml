@@ -24,10 +24,10 @@ tags:
     description: Manage bank accounts
   - name: Bank Transactions
     description: Access and manage bank transactions
-  - name: Cash Positions
-    description: View and manage cash positions
   - name: Cash Forecasts
     description: Access cash forecasting data
+  - name: Cash Positions
+    description: View and manage cash positions
   - name: Payments
     description: Manage payment processing
 security:

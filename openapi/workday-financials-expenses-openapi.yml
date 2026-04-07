@@ -20,14 +20,14 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Expense Reports
-    description: Create and manage expense reports
   - name: Expense Items
     description: Manage individual expense line items
-  - name: Receipts
-    description: Upload and manage expense receipts
   - name: Expense Policies
     description: Access expense policy configurations
+  - name: Expense Reports
+    description: Create and manage expense reports
+  - name: Receipts
+    description: Upload and manage expense receipts
 security:
   - bearerAuth: []
 paths:

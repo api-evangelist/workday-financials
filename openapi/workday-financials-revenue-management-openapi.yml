@@ -21,14 +21,14 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Revenue Contracts
-    description: Manage revenue contracts and performance obligations
-  - name: Revenue Schedules
-    description: Access and manage revenue recognition schedules
   - name: Billing Schedules
     description: Manage billing schedules and invoice generation
+  - name: Revenue Contracts
+    description: Manage revenue contracts and performance obligations
   - name: Revenue Recognition
     description: Revenue recognition events and processing
+  - name: Revenue Schedules
+    description: Access and manage revenue recognition schedules
 security:
   - bearerAuth: []
 paths:

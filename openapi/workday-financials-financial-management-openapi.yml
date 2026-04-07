@@ -21,22 +21,20 @@ servers:
         description: Workday tenant identifier
         default: your-tenant
 tags:
-  - name: Ledger Accounts
-    description: Manage general ledger accounts and chart of accounts
-  - name: Journal Entries
-    description: Create and manage journal entries
   - name: Accounting Journals
     description: Access and manage accounting journals
   - name: Accounts Payable
     description: Manage supplier invoices and payment processing
   - name: Accounts Receivable
     description: Manage customer invoices and receivables
-  - name: Financial Reports
-    description: Access and generate financial reports
   - name: Companies
     description: Manage company entities within the financial system
   - name: Cost Centers
     description: Manage cost centers for financial allocation
+  - name: Journal Entries
+    description: Create and manage journal entries
+  - name: Ledger Accounts
+    description: Manage general ledger accounts and chart of accounts
 security:
   - bearerAuth: []
 paths:
