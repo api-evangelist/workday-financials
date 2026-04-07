@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Financial Management API
+  title: Workday Financials Workday Financial Management API
   description: >-
     Core API for managing financial transactions, general ledger, accounts
     payable, accounts receivable, and financial reporting within Workday
@@ -43,7 +43,7 @@ paths:
   /ledgerAccounts:
     get:
       operationId: listLedgerAccounts
-      summary: List ledger accounts
+      summary: Workday Financials List ledger accounts
       description: >-
         Retrieve a collection of ledger accounts from the chart of accounts.
       tags:
@@ -71,7 +71,7 @@ paths:
   /ledgerAccounts/{id}:
     get:
       operationId: getLedgerAccount
-      summary: Get a ledger account
+      summary: Workday Financials Get a ledger account
       description: >-
         Retrieve details of a specific ledger account by its unique identifier.
       tags:
@@ -92,7 +92,7 @@ paths:
   /journalEntries:
     get:
       operationId: listJournalEntries
-      summary: List journal entries
+      summary: Workday Financials List journal entries
       description: >-
         Retrieve a collection of journal entries with optional filtering.
       tags:
@@ -130,7 +130,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createJournalEntry
-      summary: Create a journal entry
+      summary: Workday Financials Create a journal entry
       description: >-
         Create a new journal entry in the general ledger.
       tags:
@@ -155,7 +155,7 @@ paths:
   /journalEntries/{id}:
     get:
       operationId: getJournalEntry
-      summary: Get a journal entry
+      summary: Workday Financials Get a journal entry
       description: >-
         Retrieve details of a specific journal entry.
       tags:
@@ -176,7 +176,7 @@ paths:
   /accountingJournals:
     get:
       operationId: listAccountingJournals
-      summary: List accounting journals
+      summary: Workday Financials List accounting journals
       description: >-
         Retrieve a collection of accounting journals.
       tags:
@@ -203,7 +203,7 @@ paths:
   /supplierInvoices:
     get:
       operationId: listSupplierInvoices
-      summary: List supplier invoices
+      summary: Workday Financials List supplier invoices
       description: >-
         Retrieve a collection of supplier invoices for accounts payable.
       tags:
@@ -240,7 +240,7 @@ paths:
   /supplierInvoices/{id}:
     get:
       operationId: getSupplierInvoice
-      summary: Get a supplier invoice
+      summary: Workday Financials Get a supplier invoice
       description: >-
         Retrieve details of a specific supplier invoice.
       tags:
@@ -261,7 +261,7 @@ paths:
   /customerInvoices:
     get:
       operationId: listCustomerInvoices
-      summary: List customer invoices
+      summary: Workday Financials List customer invoices
       description: >-
         Retrieve a collection of customer invoices for accounts receivable.
       tags:
@@ -299,7 +299,7 @@ paths:
   /customerInvoices/{id}:
     get:
       operationId: getCustomerInvoice
-      summary: Get a customer invoice
+      summary: Workday Financials Get a customer invoice
       description: >-
         Retrieve details of a specific customer invoice.
       tags:
@@ -320,7 +320,7 @@ paths:
   /companies:
     get:
       operationId: listCompanies
-      summary: List companies
+      summary: Workday Financials List companies
       description: >-
         Retrieve a collection of company entities.
       tags:
@@ -347,7 +347,7 @@ paths:
   /companies/{id}:
     get:
       operationId: getCompany
-      summary: Get a company
+      summary: Workday Financials Get a company
       description: >-
         Retrieve details of a specific company entity.
       tags:
@@ -368,7 +368,7 @@ paths:
   /costCenters:
     get:
       operationId: listCostCenters
-      summary: List cost centers
+      summary: Workday Financials List cost centers
       description: >-
         Retrieve a collection of cost centers.
       tags:
@@ -395,7 +395,7 @@ paths:
   /costCenters/{id}:
     get:
       operationId: getCostCenter
-      summary: Get a cost center
+      summary: Workday Financials Get a cost center
       description: >-
         Retrieve details of a specific cost center.
       tags:

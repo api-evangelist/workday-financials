@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Reporting API
+  title: Workday Financials Workday Reporting API
   description: >-
     API for accessing financial reports, custom report execution, and analytics
     data extraction using Workday Report as a Service (RaaS).
@@ -34,7 +34,7 @@ paths:
   /reports:
     get:
       operationId: listReports
-      summary: List available reports
+      summary: Workday Financials List available reports
       description: >-
         Retrieve a collection of available report definitions.
       tags:
@@ -66,7 +66,7 @@ paths:
   /reports/{id}:
     get:
       operationId: getReport
-      summary: Get a report definition
+      summary: Workday Financials Get a report definition
       description: >-
         Retrieve the definition and metadata for a specific report.
       tags:
@@ -87,7 +87,7 @@ paths:
   /reports/{id}/execute:
     post:
       operationId: executeReport
-      summary: Execute a report
+      summary: Workday Financials Execute a report
       description: >-
         Execute a report with optional prompt values and retrieve results.
       tags:
@@ -131,7 +131,7 @@ paths:
   /reports/{id}/prompts:
     get:
       operationId: getReportPrompts
-      summary: Get report prompts
+      summary: Workday Financials Get report prompts
       description: >-
         Retrieve the prompt definitions for a specific report.
       tags:
@@ -159,7 +159,7 @@ paths:
   /customReports:
     get:
       operationId: listCustomReports
-      summary: List custom reports
+      summary: Workday Financials List custom reports
       description: >-
         Retrieve a collection of custom report definitions.
       tags:
@@ -186,7 +186,7 @@ paths:
   /customReports/{id}:
     get:
       operationId: getCustomReport
-      summary: Get a custom report
+      summary: Workday Financials Get a custom report
       description: >-
         Retrieve details of a specific custom report definition.
       tags:
@@ -207,7 +207,7 @@ paths:
   /customReports/{id}/execute:
     post:
       operationId: executeCustomReport
-      summary: Execute a custom report
+      summary: Workday Financials Execute a custom report
       description: >-
         Execute a custom report with optional prompt values and retrieve results.
       tags:

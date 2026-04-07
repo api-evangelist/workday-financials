@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Expenses API
+  title: Workday Financials Workday Expenses API
   description: >-
     API for expense report submission, approval workflows, receipt management,
     and expense policy enforcement within Workday Expense Management.
@@ -34,7 +34,7 @@ paths:
   /expenseReports:
     get:
       operationId: listExpenseReports
-      summary: List expense reports
+      summary: Workday Financials List expense reports
       description: >-
         Retrieve a collection of expense reports with optional filtering.
       tags:
@@ -77,7 +77,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createExpenseReport
-      summary: Create an expense report
+      summary: Workday Financials Create an expense report
       description: >-
         Submit a new expense report for approval processing.
       tags:
@@ -102,7 +102,7 @@ paths:
   /expenseReports/{id}:
     get:
       operationId: getExpenseReport
-      summary: Get an expense report
+      summary: Workday Financials Get an expense report
       description: >-
         Retrieve details of a specific expense report.
       tags:
@@ -122,7 +122,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateExpenseReport
-      summary: Update an expense report
+      summary: Workday Financials Update an expense report
       description: >-
         Update a draft expense report.
       tags:
@@ -151,7 +151,7 @@ paths:
   /expenseReports/{id}/submit:
     post:
       operationId: submitExpenseReport
-      summary: Submit an expense report for approval
+      summary: Workday Financials Submit an expense report for approval
       description: >-
         Submit a draft expense report into the approval workflow.
       tags:
@@ -168,7 +168,7 @@ paths:
   /expenseReports/{id}/expenseItems:
     get:
       operationId: listExpenseItems
-      summary: List expense items for a report
+      summary: Workday Financials List expense items for a report
       description: >-
         Retrieve expense line items for a specific expense report.
       tags:
@@ -195,7 +195,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: addExpenseItem
-      summary: Add an expense item to a report
+      summary: Workday Financials Add an expense item to a report
       description: >-
         Add a new expense line item to an existing expense report.
       tags:
@@ -222,7 +222,7 @@ paths:
   /receipts:
     post:
       operationId: uploadReceipt
-      summary: Upload a receipt
+      summary: Workday Financials Upload a receipt
       description: >-
         Upload a receipt image for attachment to an expense item.
       tags:
@@ -257,7 +257,7 @@ paths:
   /receipts/{id}:
     get:
       operationId: getReceipt
-      summary: Get a receipt
+      summary: Workday Financials Get a receipt
       description: >-
         Retrieve details of a specific receipt.
       tags:
@@ -277,7 +277,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteReceipt
-      summary: Delete a receipt
+      summary: Workday Financials Delete a receipt
       description: >-
         Delete a receipt that is not attached to a submitted expense report.
       tags:
@@ -294,7 +294,7 @@ paths:
   /expensePolicies:
     get:
       operationId: listExpensePolicies
-      summary: List expense policies
+      summary: Workday Financials List expense policies
       description: >-
         Retrieve a collection of expense policies.
       tags:

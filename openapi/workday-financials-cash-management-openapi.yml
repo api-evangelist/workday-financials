@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Cash Management API
+  title: Workday Financials Workday Cash Management API
   description: >-
     API for managing cash positions, bank accounts, transactions, and cash
     forecasting within Workday Cash Management.
@@ -36,7 +36,7 @@ paths:
   /bankAccounts:
     get:
       operationId: listBankAccounts
-      summary: List bank accounts
+      summary: Workday Financials List bank accounts
       description: >-
         Retrieve a collection of bank accounts.
       tags:
@@ -68,7 +68,7 @@ paths:
   /bankAccounts/{id}:
     get:
       operationId: getBankAccount
-      summary: Get a bank account
+      summary: Workday Financials Get a bank account
       description: >-
         Retrieve details of a specific bank account.
       tags:
@@ -89,7 +89,7 @@ paths:
   /bankAccounts/{id}/transactions:
     get:
       operationId: listBankTransactions
-      summary: List bank transactions for an account
+      summary: Workday Financials List bank transactions for an account
       description: >-
         Retrieve bank transactions associated with a specific bank account.
       tags:
@@ -131,7 +131,7 @@ paths:
   /cashPositions:
     get:
       operationId: listCashPositions
-      summary: List cash positions
+      summary: Workday Financials List cash positions
       description: >-
         Retrieve current cash positions across bank accounts.
       tags:
@@ -164,7 +164,7 @@ paths:
   /cashPositions/{id}:
     get:
       operationId: getCashPosition
-      summary: Get a cash position
+      summary: Workday Financials Get a cash position
       description: >-
         Retrieve details of a specific cash position.
       tags:
@@ -185,7 +185,7 @@ paths:
   /cashForecasts:
     get:
       operationId: listCashForecasts
-      summary: List cash forecasts
+      summary: Workday Financials List cash forecasts
       description: >-
         Retrieve cash forecast projections.
       tags:
@@ -218,7 +218,7 @@ paths:
   /payments:
     get:
       operationId: listPayments
-      summary: List payments
+      summary: Workday Financials List payments
       description: >-
         Retrieve a collection of payments.
       tags:
@@ -255,7 +255,7 @@ paths:
   /payments/{id}:
     get:
       operationId: getPayment
-      summary: Get a payment
+      summary: Workday Financials Get a payment
       description: >-
         Retrieve details of a specific payment.
       tags:

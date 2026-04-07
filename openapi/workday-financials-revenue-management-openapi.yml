@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Revenue Management API
+  title: Workday Financials Workday Revenue Management API
   description: >-
     API for managing revenue recognition, contracts, billing, and revenue
     accounting in compliance with ASC 606 and IFRS 15 within Workday Revenue
@@ -35,7 +35,7 @@ paths:
   /revenueContracts:
     get:
       operationId: listRevenueContracts
-      summary: List revenue contracts
+      summary: Workday Financials List revenue contracts
       description: >-
         Retrieve a collection of revenue contracts.
       tags:
@@ -72,7 +72,7 @@ paths:
   /revenueContracts/{id}:
     get:
       operationId: getRevenueContract
-      summary: Get a revenue contract
+      summary: Workday Financials Get a revenue contract
       description: >-
         Retrieve details of a specific revenue contract.
       tags:
@@ -93,7 +93,7 @@ paths:
   /revenueContracts/{id}/performanceObligations:
     get:
       operationId: listPerformanceObligations
-      summary: List performance obligations for a contract
+      summary: Workday Financials List performance obligations for a contract
       description: >-
         Retrieve performance obligations associated with a revenue contract.
       tags:
@@ -121,7 +121,7 @@ paths:
   /revenueSchedules:
     get:
       operationId: listRevenueSchedules
-      summary: List revenue schedules
+      summary: Workday Financials List revenue schedules
       description: >-
         Retrieve a collection of revenue recognition schedules.
       tags:
@@ -148,7 +148,7 @@ paths:
   /revenueSchedules/{id}:
     get:
       operationId: getRevenueSchedule
-      summary: Get a revenue schedule
+      summary: Workday Financials Get a revenue schedule
       description: >-
         Retrieve details of a specific revenue recognition schedule.
       tags:
@@ -169,7 +169,7 @@ paths:
   /billingSchedules:
     get:
       operationId: listBillingSchedules
-      summary: List billing schedules
+      summary: Workday Financials List billing schedules
       description: >-
         Retrieve a collection of billing schedules.
       tags:
@@ -196,7 +196,7 @@ paths:
   /billingSchedules/{id}:
     get:
       operationId: getBillingSchedule
-      summary: Get a billing schedule
+      summary: Workday Financials Get a billing schedule
       description: >-
         Retrieve details of a specific billing schedule.
       tags:
@@ -217,7 +217,7 @@ paths:
   /revenueRecognitionEvents:
     get:
       operationId: listRevenueRecognitionEvents
-      summary: List revenue recognition events
+      summary: Workday Financials List revenue recognition events
       description: >-
         Retrieve a collection of revenue recognition events.
       tags:

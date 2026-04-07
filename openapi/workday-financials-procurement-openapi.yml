@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Procurement API
+  title: Workday Financials Workday Procurement API
   description: >-
     API for purchase requisitions, purchase orders, supplier management,
     and procurement processes within Workday Resource Management.
@@ -36,7 +36,7 @@ paths:
   /purchaseRequisitions:
     get:
       operationId: listPurchaseRequisitions
-      summary: List purchase requisitions
+      summary: Workday Financials List purchase requisitions
       description: >-
         Retrieve a collection of purchase requisitions.
       tags:
@@ -73,7 +73,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createPurchaseRequisition
-      summary: Create a purchase requisition
+      summary: Workday Financials Create a purchase requisition
       description: >-
         Submit a new purchase requisition for approval.
       tags:
@@ -98,7 +98,7 @@ paths:
   /purchaseRequisitions/{id}:
     get:
       operationId: getPurchaseRequisition
-      summary: Get a purchase requisition
+      summary: Workday Financials Get a purchase requisition
       description: >-
         Retrieve details of a specific purchase requisition.
       tags:
@@ -119,7 +119,7 @@ paths:
   /purchaseOrders:
     get:
       operationId: listPurchaseOrders
-      summary: List purchase orders
+      summary: Workday Financials List purchase orders
       description: >-
         Retrieve a collection of purchase orders.
       tags:
@@ -157,7 +157,7 @@ paths:
   /purchaseOrders/{id}:
     get:
       operationId: getPurchaseOrder
-      summary: Get a purchase order
+      summary: Workday Financials Get a purchase order
       description: >-
         Retrieve details of a specific purchase order.
       tags:
@@ -178,7 +178,7 @@ paths:
   /purchaseOrders/{id}/lines:
     get:
       operationId: listPurchaseOrderLines
-      summary: List purchase order lines
+      summary: Workday Financials List purchase order lines
       description: >-
         Retrieve line items for a specific purchase order.
       tags:
@@ -206,7 +206,7 @@ paths:
   /suppliers:
     get:
       operationId: listSuppliers
-      summary: List suppliers
+      summary: Workday Financials List suppliers
       description: >-
         Retrieve a collection of suppliers.
       tags:
@@ -238,7 +238,7 @@ paths:
   /suppliers/{id}:
     get:
       operationId: getSupplier
-      summary: Get a supplier
+      summary: Workday Financials Get a supplier
       description: >-
         Retrieve details of a specific supplier.
       tags:
@@ -259,7 +259,7 @@ paths:
   /supplierContracts:
     get:
       operationId: listSupplierContracts
-      summary: List supplier contracts
+      summary: Workday Financials List supplier contracts
       description: >-
         Retrieve a collection of supplier contracts.
       tags:
@@ -286,7 +286,7 @@ paths:
   /supplierContracts/{id}:
     get:
       operationId: getSupplierContract
-      summary: Get a supplier contract
+      summary: Workday Financials Get a supplier contract
       description: >-
         Retrieve details of a specific supplier contract.
       tags:
@@ -307,7 +307,7 @@ paths:
   /goodsReceipts:
     get:
       operationId: listGoodsReceipts
-      summary: List goods receipts
+      summary: Workday Financials List goods receipts
       description: >-
         Retrieve a collection of goods receipts.
       tags:

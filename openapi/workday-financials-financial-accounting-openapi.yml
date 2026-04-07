@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Financial Accounting API
+  title: Workday Financials Workday Financial Accounting API
   description: >-
     API for journal entries, account reconciliation, period close activities,
     and audit trails within Workday Financial Accounting.
@@ -36,7 +36,7 @@ paths:
   /journalEntries:
     get:
       operationId: listJournalEntries
-      summary: List journal entries
+      summary: Workday Financials List journal entries
       description: >-
         Retrieve a collection of journal entries.
       tags:
@@ -85,7 +85,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createJournalEntry
-      summary: Create a journal entry
+      summary: Workday Financials Create a journal entry
       description: >-
         Create a new journal entry for financial accounting.
       tags:
@@ -110,7 +110,7 @@ paths:
   /journalEntries/{id}:
     get:
       operationId: getJournalEntry
-      summary: Get a journal entry
+      summary: Workday Financials Get a journal entry
       description: >-
         Retrieve details of a specific journal entry.
       tags:
@@ -131,7 +131,7 @@ paths:
   /journalEntries/{id}/post:
     post:
       operationId: postJournalEntry
-      summary: Post a journal entry
+      summary: Workday Financials Post a journal entry
       description: >-
         Post an approved journal entry to the general ledger.
       tags:
@@ -150,7 +150,7 @@ paths:
   /journalEntries/{id}/reverse:
     post:
       operationId: reverseJournalEntry
-      summary: Reverse a journal entry
+      summary: Workday Financials Reverse a journal entry
       description: >-
         Create a reversal of a posted journal entry.
       tags:
@@ -181,7 +181,7 @@ paths:
   /accountReconciliations:
     get:
       operationId: listAccountReconciliations
-      summary: List account reconciliations
+      summary: Workday Financials List account reconciliations
       description: >-
         Retrieve a collection of account reconciliations.
       tags:
@@ -217,7 +217,7 @@ paths:
   /accountReconciliations/{id}:
     get:
       operationId: getAccountReconciliation
-      summary: Get an account reconciliation
+      summary: Workday Financials Get an account reconciliation
       description: >-
         Retrieve details of a specific account reconciliation.
       tags:
@@ -238,7 +238,7 @@ paths:
   /accountingPeriods:
     get:
       operationId: listAccountingPeriods
-      summary: List accounting periods
+      summary: Workday Financials List accounting periods
       description: >-
         Retrieve a collection of accounting periods.
       tags:
@@ -265,7 +265,7 @@ paths:
   /accountingPeriods/{id}:
     get:
       operationId: getAccountingPeriod
-      summary: Get an accounting period
+      summary: Workday Financials Get an accounting period
       description: >-
         Retrieve details of a specific accounting period.
       tags:
@@ -286,7 +286,7 @@ paths:
   /accountingPeriods/{id}/close:
     post:
       operationId: closeAccountingPeriod
-      summary: Close an accounting period
+      summary: Workday Financials Close an accounting period
       description: >-
         Close an open accounting period, preventing further postings.
       tags:
@@ -305,7 +305,7 @@ paths:
   /auditLogs:
     get:
       operationId: listAuditLogs
-      summary: List audit logs
+      summary: Workday Financials List audit logs
       description: >-
         Retrieve financial audit trail entries.
       tags:
@@ -349,7 +349,7 @@ paths:
   /trialBalances:
     get:
       operationId: listTrialBalances
-      summary: List trial balances
+      summary: Workday Financials List trial balances
       description: >-
         Retrieve trial balance data for specified periods.
       tags:
