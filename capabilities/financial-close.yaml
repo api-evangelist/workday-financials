@@ -1,0 +1,179 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Financials Financial Close"
+  description: "Unified capability for the financial close process combining general ledger management, journal entries, account reconciliation, period management, and financial reporting. Supports the record-to-report workflow for finance teams."
+  tags:
+    - Workday
+    - Financials
+    - Financial Close
+    - General Ledger
+    - Reporting
+    - Record To Report
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_FINANCIALS_ACCESS_TOKEN: WORKDAY_FINANCIALS_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - import: financials-core
+      location: ./shared/financial-management.yaml
+    - import: financials-reporting
+      location: ./shared/reporting.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: workday-financials-close-api
+      description: "Unified REST API for Workday Financials financial close and reporting."
+      resources:
+        - path: /v1/ledger-accounts
+          name: ledger-accounts
+          description: "General ledger account management"
+          operations:
+            - method: GET
+              name: list-ledger-accounts
+              description: "List ledger accounts"
+              call: "financials-core.list-ledger-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/journal-entries
+          name: journal-entries
+          description: "Journal entry management"
+          operations:
+            - method: GET
+              name: list-journal-entries
+              description: "List journal entries"
+              call: "financials-core.list-journal-entries"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-journal-entry
+              description: "Create a journal entry"
+              call: "financials-core.create-journal-entry"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/supplier-invoices
+          name: supplier-invoices
+          description: "Supplier invoice management"
+          operations:
+            - method: GET
+              name: list-supplier-invoices
+              description: "List supplier invoices"
+              call: "financials-core.list-supplier-invoices"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/cost-centers
+          name: cost-centers
+          description: "Cost center management"
+          operations:
+            - method: GET
+              name: list-cost-centers
+              description: "List cost centers"
+              call: "financials-core.list-cost-centers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reports
+          name: reports
+          description: "Financial report management"
+          operations:
+            - method: GET
+              name: list-reports
+              description: "List available reports"
+              call: "financials-reporting.list-reports"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: workday-financials-close-mcp
+      transport: http
+      description: "MCP server for AI-assisted Workday Financials financial close process."
+      tools:
+        - name: list-ledger-accounts
+          description: "List general ledger accounts in Workday Financials"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-core.list-ledger-accounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-journal-entries
+          description: "List journal entries in Workday Financials"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-core.list-journal-entries"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-journal-entry
+          description: "Create a new journal entry in Workday Financials"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "financials-core.create-journal-entry"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-supplier-invoices
+          description: "List accounts payable supplier invoices"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-core.list-supplier-invoices"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-cost-centers
+          description: "List cost center organizations"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-core.list-cost-centers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-reports
+          description: "List available financial reports"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-reporting.list-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: execute-report
+          description: "Execute a standard financial report and retrieve results"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "financials-reporting.execute-report"
+          with:
+            reportId: "tools.reportId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: execute-custom-report
+          description: "Execute a custom Workday Financials report"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "financials-reporting.execute-custom-report"
+          with:
+            reportId: "tools.reportId"
+          outputParameters:
+            - type: object
+              mapping: "$."

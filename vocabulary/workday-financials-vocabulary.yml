@@ -1,0 +1,104 @@
+name: Workday Financials Vocabulary
+description: Vocabulary and taxonomy for Workday Financials APIs covering accounting, procurement, reporting, expenses, and revenue management.
+url: https://raw.githubusercontent.com/api-evangelist/workday-financials/main/vocabulary/workday-financials-vocabulary.yml
+created: '2026-05-03'
+modified: '2026-05-03'
+
+domains:
+  - name: General Ledger
+    description: Core accounting and ledger concepts
+    terms:
+      - name: Ledger Account
+        description: An account in the chart of accounts used to record financial transactions
+        synonyms: [GL Account, Chart of Accounts, Account]
+        values: [asset, liability, equity, revenue, expense]
+      - name: Journal Entry
+        description: A debit/credit record posted to the general ledger
+        synonyms: [Accounting Entry, GL Entry]
+        related: [LedgerAccount, AccountingJournal, AccountingPeriod]
+      - name: Accounting Journal
+        description: A named book of original entry containing a sequence of journal entries
+        synonyms: [Journal, Book of Entry]
+        related: [JournalEntry]
+      - name: Account Reconciliation
+        description: The process of verifying account balances match supporting documentation
+        synonyms: [Reconciliation, Balance Verification]
+        related: [LedgerAccount, AccountingPeriod]
+      - name: Accounting Period
+        description: A defined time interval for financial transactions and close activities
+        synonyms: [Period, Fiscal Period, Month-End]
+        related: [JournalEntry, AccountReconciliation]
+
+  - name: Accounts Payable
+    description: Supplier invoice and payment concepts
+    terms:
+      - name: Supplier Invoice
+        description: An invoice received from a supplier requesting payment for goods or services
+        synonyms: [AP Invoice, Vendor Invoice, Bill]
+        related: [Supplier, PurchaseOrder, Payment]
+      - name: Supplier
+        description: An external organization that provides goods or services
+        synonyms: [Vendor, Payee, Creditor]
+        related: [SupplierInvoice, PurchaseOrder, SupplierContract]
+      - name: Supplier Contract
+        description: A formal agreement with a supplier defining terms, pricing, and duration
+        synonyms: [Vendor Contract, Procurement Contract]
+        related: [Supplier, PurchaseOrder]
+
+  - name: Accounts Receivable
+    description: Customer invoice and receivables concepts
+    terms:
+      - name: Customer Invoice
+        description: An invoice sent to a customer requesting payment for goods or services delivered
+        synonyms: [AR Invoice, Sales Invoice]
+        related: [RevenueContract, Customer]
+
+  - name: Procurement
+    description: Purchasing and supply chain concepts
+    terms:
+      - name: Purchase Order
+        description: A formal authorization to purchase from a supplier at agreed terms
+        synonyms: [PO, Order]
+        related: [Supplier, PurchaseRequisition, GoodsReceipt]
+      - name: Purchase Requisition
+        description: An internal request to purchase goods or services pending approval
+        synonyms: [PR, Requisition]
+        related: [PurchaseOrder]
+      - name: Goods Receipt
+        description: A record confirming receipt of goods ordered via a purchase order
+        synonyms: [Receipt, Receiving Document]
+        related: [PurchaseOrder]
+
+  - name: Revenue Management
+    description: Revenue recognition and billing concepts
+    terms:
+      - name: Revenue Contract
+        description: A contract with a customer under which revenue is recognized per ASC 606/IFRS 15
+        synonyms: [Contract, Customer Contract]
+        related: [PerformanceObligation, RevenueSchedule]
+      - name: Performance Obligation
+        description: A promise to transfer a distinct good or service to a customer within a revenue contract
+        synonyms: [POB, Obligation]
+        related: [RevenueContract]
+      - name: Revenue Schedule
+        description: The timeline and amounts for recognizing revenue from a contract
+        synonyms: [Recognition Schedule]
+        related: [RevenueContract, PerformanceObligation]
+
+  - name: Financial Reporting
+    description: Reporting and analytics concepts
+    terms:
+      - name: Financial Report
+        description: A structured presentation of financial data for a period
+        synonyms: [Report, Finance Report]
+        examples: [Trial Balance, Income Statement, Balance Sheet, Cash Flow]
+      - name: Custom Report
+        description: A user-defined report in Workday built with Report Writer
+        synonyms: [Workday Report, Report Writer Report]
+
+tags:
+  - Accounting
+  - Cloud ERP
+  - Financial Management
+  - Procurement
+  - Workday

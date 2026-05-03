@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://{tenant}.workday.com/api/reporting/v38.2/reports/{reportId}/execute",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "parameters": {
+        "fiscalYear": "FY2026",
+        "period": "Q1",
+        "company": "company_global_hq",
+        "format": "json"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "reportId": "rpt_trial_balance",
+      "reportName": "Trial Balance",
+      "executedAt": "2026-05-03T10:00:00Z",
+      "parameters": {
+        "fiscalYear": "FY2026",
+        "period": "Q1"
+      },
+      "data": {
+        "rows": [
+          {"account": "1000", "accountName": "Cash", "debit": 500000.00, "credit": 0, "balance": 500000.00},
+          {"account": "2000", "accountName": "Accounts Payable", "debit": 0, "credit": 75000.00, "balance": -75000.00},
+          {"account": "6000", "accountName": "Operating Expenses", "debit": 125000.00, "credit": 0, "balance": 125000.00}
+        ],
+        "totalDebit": 625000.00,
+        "totalCredit": 75000.00
+      }
+    }
+  }
+}

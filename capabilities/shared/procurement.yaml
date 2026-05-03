@@ -1,0 +1,156 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Financials Procurement API"
+  description: "API for procurement operations including purchase requisitions, purchase orders, suppliers, supplier contracts, and goods receipts."
+  tags:
+    - Workday
+    - Financials
+    - Procurement
+    - Suppliers
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_FINANCIALS_ACCESS_TOKEN: WORKDAY_FINANCIALS_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: financials-procurement
+      baseUri: https://{tenant}.workday.com/api/procurement/v38.2
+      description: "Workday Financials procurement API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_FINANCIALS_ACCESS_TOKEN}}"
+      resources:
+        - name: suppliers
+          path: /suppliers
+          description: "Supplier management"
+          operations:
+            - name: list-suppliers
+              method: GET
+              description: "List suppliers"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-supplier
+              method: GET
+              description: "Get a supplier"
+              inputParameters:
+                - name: supplierId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Supplier identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: purchase-orders
+          path: /purchaseOrders
+          description: "Purchase order management"
+          operations:
+            - name: list-purchase-orders
+              method: GET
+              description: "List purchase orders"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-purchase-order
+              method: GET
+              description: "Get a purchase order"
+              inputParameters:
+                - name: poId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Purchase order identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: requisitions
+          path: /purchaseRequisitions
+          description: "Purchase requisition management"
+          operations:
+            - name: list-purchase-requisitions
+              method: GET
+              description: "List purchase requisitions"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-purchase-requisition
+              method: POST
+              description: "Create a purchase requisition"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  description: "{{tools.description}}"
+                  lines: "{{tools.lines}}"
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: financials-procurement-rest
+      resources:
+        - path: /v1/suppliers
+          name: suppliers
+          description: "Supplier management"
+          operations:
+            - method: GET
+              name: list-suppliers
+              description: "List suppliers"
+              call: "financials-procurement.list-suppliers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: financials-procurement-mcp
+      transport: http
+      tools:
+        - name: list-suppliers
+          description: "List suppliers"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-procurement.list-suppliers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-purchase-orders
+          description: "List purchase orders"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "financials-procurement.list-purchase-orders"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-purchase-requisition
+          description: "Create a purchase requisition"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "financials-procurement.create-purchase-requisition"
+          outputParameters:
+            - type: object
+              mapping: "$."

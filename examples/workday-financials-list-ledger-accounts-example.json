@@ -1,0 +1,46 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://{tenant}.workday.com/api/financialManagement/v38.2/ledgerAccounts",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Accept": "application/json"
+    },
+    "parameters": {"limit": 20, "offset": 0}
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "total": 3,
+      "data": [
+        {
+          "id": "acct_1000",
+          "descriptor": "1000 Cash and Cash Equivalents",
+          "accountNumber": "1000",
+          "accountName": "Cash and Cash Equivalents",
+          "accountType": "asset",
+          "active": true,
+          "href": "https://tenant1.workday.com/api/financialManagement/v38.2/ledgerAccounts/acct_1000"
+        },
+        {
+          "id": "acct_2000",
+          "descriptor": "2000 Accounts Payable",
+          "accountNumber": "2000",
+          "accountName": "Accounts Payable",
+          "accountType": "liability",
+          "active": true,
+          "href": "https://tenant1.workday.com/api/financialManagement/v38.2/ledgerAccounts/acct_2000"
+        },
+        {
+          "id": "acct_6000",
+          "descriptor": "6000 Operating Expenses",
+          "accountNumber": "6000",
+          "accountName": "Operating Expenses",
+          "accountType": "expense",
+          "active": true,
+          "href": "https://tenant1.workday.com/api/financialManagement/v38.2/ledgerAccounts/acct_6000"
+        }
+      ]
+    }
+  }
+}

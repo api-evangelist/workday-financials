@@ -1,0 +1,14 @@
+{
+  "name": "Workday Financials Ledger Account",
+  "description": "Structure of a Workday Financials general ledger account",
+  "fields": [
+    {"name": "id", "type": "string", "required": true},
+    {"name": "descriptor", "type": "string"},
+    {"name": "accountNumber", "type": "string", "required": true},
+    {"name": "accountName", "type": "string"},
+    {"name": "accountType", "type": "enum", "values": ["asset","liability","equity","revenue","expense"]},
+    {"name": "active", "type": "boolean"},
+    {"name": "company", "type": "object", "fields": [{"name": "id", "type": "string"}, {"name": "descriptor", "type": "string"}]},
+    {"name": "href", "type": "string", "format": "uri"}
+  ]
+}

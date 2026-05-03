@@ -157,6 +157,14 @@ common:
     url: json-schema/workday-financials-journal-entry-schema.json
   - type: JSONSchema
     url: json-schema/workday-financials-supplier-invoice-schema.json
+  - type: Spectral Rules
+    url: rules/workday-financials-rules.yml
+  - type: Naftiko Capabilities
+    url: capabilities/financial-close.yaml
+  - type: Naftiko Capabilities
+    url: capabilities/procure-to-pay.yaml
+  - type: Vocabulary
+    url: vocabulary/workday-financials-vocabulary.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
