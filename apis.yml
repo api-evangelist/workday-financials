@@ -139,19 +139,19 @@ common:
     url: https://community.workday.com/developer
   - type: Authentication
     url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
-  - type: Rate Limits
+  - type: RateLimits
     url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/rate-limiting.html
-  - type: Status Page
+  - type: StatusPage
     url: https://status.workday.com/
   - type: Support
     url: https://www.workday.com/en-us/company/latest/support.html
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.workday.com/en-us/legal.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.workday.com/en-us/privacy.html
   - type: Contact
     url: https://www.workday.com/en-us/company/latest/contact-us.html
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/workday-financials-context.jsonld
   - type: JSONSchema
     url: json-schema/workday-financials-journal-entry-schema.json
