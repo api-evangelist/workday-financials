@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Financial Management API — Companies
+  description: 'Workday Financials Workday Financial Management API — Companies. 2 operations. Lead operation: Workday Financials
+    List companies. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Companies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: financial-management-companies
+    baseUri: https://{tenant}.workday.com/api/financialManagement/v38.2
+    description: Workday Financials Workday Financial Management API — Companies business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: companies
+      path: /companies
+      operations:
+      - name: listcompanies
+        method: GET
+        description: Workday Financials List companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies-id
+      path: /companies/{id}
+      operations:
+      - name: getcompany
+        method: GET
+        description: Workday Financials Get a company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: financial-management-companies-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Financial Management API — Companies. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies
+      name: companies
+      description: REST surface for companies.
+      operations:
+      - method: GET
+        name: listcompanies
+        description: Workday Financials List companies
+        call: financial-management-companies.listcompanies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies/{id}
+      name: companies-id
+      description: REST surface for companies-id.
+      operations:
+      - method: GET
+        name: getcompany
+        description: Workday Financials Get a company
+        call: financial-management-companies.getcompany
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: financial-management-companies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Financial Management API — Companies. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-companies
+      description: Workday Financials List companies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: financial-management-companies.listcompanies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-financials-get-company
+      description: Workday Financials Get a company
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: financial-management-companies.getcompany
+      outputParameters:
+      - type: object
+        mapping: $.

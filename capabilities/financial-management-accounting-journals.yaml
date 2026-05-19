@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Financial Management API — Accounting Journals
+  description: 'Workday Financials Workday Financial Management API — Accounting Journals. 1 operations. Lead operation: Workday
+    Financials List accounting journals. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Accounting Journals
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: financial-management-accounting-journals
+    baseUri: https://{tenant}.workday.com/api/financialManagement/v38.2
+    description: Workday Financials Workday Financial Management API — Accounting Journals business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: accountingJournals
+      path: /accountingJournals
+      operations:
+      - name: listaccountingjournals
+        method: GET
+        description: Workday Financials List accounting journals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: financial-management-accounting-journals-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Financial Management API — Accounting Journals. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/accountingjournals
+      name: accountingjournals
+      description: REST surface for accountingJournals.
+      operations:
+      - method: GET
+        name: listaccountingjournals
+        description: Workday Financials List accounting journals
+        call: financial-management-accounting-journals.listaccountingjournals
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: financial-management-accounting-journals-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Financial Management API — Accounting Journals. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-accounting-journals
+      description: Workday Financials List accounting journals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: financial-management-accounting-journals.listaccountingjournals
+      outputParameters:
+      - type: object
+        mapping: $.

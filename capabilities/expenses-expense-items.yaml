@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Expenses API — Expense Items
+  description: 'Workday Financials Workday Expenses API — Expense Items. 2 operations. Lead operation: Workday Financials
+    List expense items for a report. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Expense Items
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: expenses-expense-items
+    baseUri: https://{tenant}.workday.com/api/expenses/v38.2
+    description: Workday Financials Workday Expenses API — Expense Items business capability. Self-contained, no shared references.
+    resources:
+    - name: expenseReports-id-expenseItems
+      path: /expenseReports/{id}/expenseItems
+      operations:
+      - name: listexpenseitems
+        method: GET
+        description: Workday Financials List expense items for a report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addexpenseitem
+        method: POST
+        description: Workday Financials Add an expense item to a report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: expenses-expense-items-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Expenses API — Expense Items. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/expensereports/{id}/expenseitems
+      name: expensereports-id-expenseitems
+      description: REST surface for expenseReports-id-expenseItems.
+      operations:
+      - method: GET
+        name: listexpenseitems
+        description: Workday Financials List expense items for a report
+        call: expenses-expense-items.listexpenseitems
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addexpenseitem
+        description: Workday Financials Add an expense item to a report
+        call: expenses-expense-items.addexpenseitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: expenses-expense-items-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Expenses API — Expense Items. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-expense-items
+      description: Workday Financials List expense items for a report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: expenses-expense-items.listexpenseitems
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-financials-add-expense-item
+      description: Workday Financials Add an expense item to a report
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: expenses-expense-items.addexpenseitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

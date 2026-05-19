@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Financial Accounting API — Trial Balances
+  description: 'Workday Financials Workday Financial Accounting API — Trial Balances. 1 operations. Lead operation: Workday
+    Financials List trial balances. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Trial Balances
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: financial-accounting-trial-balances
+    baseUri: https://{tenant}.workday.com/api/financialAccounting/v38.2
+    description: Workday Financials Workday Financial Accounting API — Trial Balances business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: trialBalances
+      path: /trialBalances
+      operations:
+      - name: listtrialbalances
+        method: GET
+        description: Workday Financials List trial balances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: period
+          in: query
+          type: string
+          description: Accounting period identifier
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: financial-accounting-trial-balances-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Financial Accounting API — Trial Balances. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/trialbalances
+      name: trialbalances
+      description: REST surface for trialBalances.
+      operations:
+      - method: GET
+        name: listtrialbalances
+        description: Workday Financials List trial balances
+        call: financial-accounting-trial-balances.listtrialbalances
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: financial-accounting-trial-balances-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Financial Accounting API — Trial Balances. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-trial-balances
+      description: Workday Financials List trial balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: financial-accounting-trial-balances.listtrialbalances
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Revenue Management API — Billing Schedules
+  description: 'Workday Financials Workday Revenue Management API — Billing Schedules. 2 operations. Lead operation: Workday
+    Financials List billing schedules. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Billing Schedules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: revenue-management-billing-schedules
+    baseUri: https://{tenant}.workday.com/api/revenueManagement/v38.2
+    description: Workday Financials Workday Revenue Management API — Billing Schedules business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: billingSchedules
+      path: /billingSchedules
+      operations:
+      - name: listbillingschedules
+        method: GET
+        description: Workday Financials List billing schedules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billingSchedules-id
+      path: /billingSchedules/{id}
+      operations:
+      - name: getbillingschedule
+        method: GET
+        description: Workday Financials Get a billing schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: revenue-management-billing-schedules-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Revenue Management API — Billing Schedules. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/billingschedules
+      name: billingschedules
+      description: REST surface for billingSchedules.
+      operations:
+      - method: GET
+        name: listbillingschedules
+        description: Workday Financials List billing schedules
+        call: revenue-management-billing-schedules.listbillingschedules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billingschedules/{id}
+      name: billingschedules-id
+      description: REST surface for billingSchedules-id.
+      operations:
+      - method: GET
+        name: getbillingschedule
+        description: Workday Financials Get a billing schedule
+        call: revenue-management-billing-schedules.getbillingschedule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: revenue-management-billing-schedules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Revenue Management API — Billing Schedules. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-billing-schedules
+      description: Workday Financials List billing schedules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-management-billing-schedules.listbillingschedules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-financials-get-billing-schedule
+      description: Workday Financials Get a billing schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: revenue-management-billing-schedules.getbillingschedule
+      outputParameters:
+      - type: object
+        mapping: $.

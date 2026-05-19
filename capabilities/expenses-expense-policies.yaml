@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Expenses API — Expense Policies
+  description: 'Workday Financials Workday Expenses API — Expense Policies. 1 operations. Lead operation: Workday Financials
+    List expense policies. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Expense Policies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: expenses-expense-policies
+    baseUri: https://{tenant}.workday.com/api/expenses/v38.2
+    description: Workday Financials Workday Expenses API — Expense Policies business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: expensePolicies
+      path: /expensePolicies
+      operations:
+      - name: listexpensepolicies
+        method: GET
+        description: Workday Financials List expense policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: expenses-expense-policies-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Expenses API — Expense Policies. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/expensepolicies
+      name: expensepolicies
+      description: REST surface for expensePolicies.
+      operations:
+      - method: GET
+        name: listexpensepolicies
+        description: Workday Financials List expense policies
+        call: expenses-expense-policies.listexpensepolicies
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: expenses-expense-policies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Expenses API — Expense Policies. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-expense-policies
+      description: Workday Financials List expense policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: expenses-expense-policies.listexpensepolicies
+      outputParameters:
+      - type: object
+        mapping: $.

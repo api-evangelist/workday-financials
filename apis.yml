@@ -1,170 +1,240 @@
 aid: workday-financials
 name: Workday Financials
-description: Workday Financials is a cloud-based financial management system that provides comprehensive solutions for accounting, procurement, expenses, and financial reporting.
+description: Workday Financials is a cloud-based financial management system that provides comprehensive solutions for accounting,
+  procurement, expenses, and financial reporting.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Accounting
-  - Cloud ERP
-  - Financial Management
-  - Procurement
+- Accounting
+- Cloud ERP
+- Financial Management
+- Procurement
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-05-19'
 specificationVersion: '0.19'
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/workday-financials/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/workday-financials/refs/heads/main/apis.yml
 apis:
-  - name: Workday Financial Management API
-    description: Core API for managing financial transactions, general ledger, accounts payable, accounts receivable, and financial reporting.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
-    baseURL: https://api.workday.com/financialManagement
-    tags:
-      - Accounts Payable
-      - Accounts Receivable
-      - Financial Reporting
-      - General Ledger
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
-      - type: Authentication
-        url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
-      - type: OpenAPI
-        url: openapi/workday-financials-financial-management-openapi.yml
-  - name: Workday Revenue Management API
-    description: API for managing revenue recognition, contracts, billing, and revenue accounting in compliance with ASC 606 and IFRS 15.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/revenue-management.html
-    baseURL: https://api.workday.com/revenueManagement
-    tags:
-      - Billing
-      - Contracts
-      - Revenue Recognition
-      - Subscription Management
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Revenue_Management/v38.2/Revenue_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-revenue-management-openapi.yml
-  - name: Workday Expenses API
-    description: API for expense report submission, approval workflows, receipt management, and expense policy enforcement.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/expense-management.html
-    baseURL: https://api.workday.com/expenses
-    tags:
-      - Approvals
-      - Expense Reports
-      - Receipt Management
-      - Travel Expenses
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Expenses/v38.2/Expenses.json
-      - type: OpenAPI
-        url: openapi/workday-financials-expenses-openapi.yml
-  - name: Workday Procurement API
-    description: API for purchase requisitions, purchase orders, supplier management, and procurement processes.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/procurement.html
-    baseURL: https://api.workday.com/procurement
-    tags:
-      - Procurement
-      - Purchase Orders
-      - Requisitions
-      - Suppliers
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Resource_Management/v38.2/Resource_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-procurement-openapi.yml
-  - name: Workday Cash Management API
-    description: API for managing cash positions, bank accounts, transactions, and cash forecasting.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/cash-management.html
-    baseURL: https://api.workday.com/cashManagement
-    tags:
-      - Bank Accounts
-      - Cash Management
-      - Forecasting
-      - Treasury
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Cash_Management/v38.2/Cash_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-cash-management-openapi.yml
-  - name: Workday Financial Accounting API
-    description: API for journal entries, account reconciliation, period close activities, and audit trails.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/financial-accounting.html
-    baseURL: https://api.workday.com/financialAccounting
-    tags:
-      - Account Reconciliation
-      - Audit
-      - Journal Entries
-      - Period Close
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-financial-accounting-openapi.yml
-  - name: Workday Reporting API
-    description: API for accessing financial reports, custom report execution, and analytics data extraction.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/financial-reporting.html
-    baseURL: https://api.workday.com/reporting
-    tags:
-      - Analytics
-      - Custom Reports
-      - Financial Reports
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Report_as_a_Service/v38.2/Report_as_a_Service.json
-      - type: OpenAPI
-        url: openapi/workday-financials-reporting-openapi.yml
-common:
-  - type: Developer Portal
-    url: https://community.workday.com/developer
+- name: Workday Financial Management API
+  description: Core API for managing financial transactions, general ledger, accounts payable, accounts receivable, and financial
+    reporting.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Accounts Payable
+  - Accounts Receivable
+  - Financial Reporting
+  - General Ledger
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
   - type: Authentication
     url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
-  - type: RateLimits
-    url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/rate-limiting.html
-  - type: StatusPage
-    url: https://status.workday.com/
-  - type: Support
-    url: https://www.workday.com/en-us/company/latest/support.html
-  - type: TermsOfService
-    url: https://www.workday.com/en-us/legal.html
-  - type: PrivacyPolicy
-    url: https://www.workday.com/en-us/privacy.html
-  - type: Contact
-    url: https://www.workday.com/en-us/company/latest/contact-us.html
-  - type: JSONLD
-    url: json-ld/workday-financials-context.jsonld
-  - type: JSONSchema
-    url: json-schema/workday-financials-journal-entry-schema.json
-  - type: JSONSchema
-    url: json-schema/workday-financials-supplier-invoice-schema.json
-  - type: Spectral Rules
-    url: rules/workday-financials-rules.yml
-  - type: Naftiko Capabilities
-    url: capabilities/financial-close.yaml
-  - type: Naftiko Capabilities
-    url: capabilities/procure-to-pay.yaml
-  - type: Vocabulary
-    url: vocabulary/workday-financials-vocabulary.yml
+  - type: OpenAPI
+    url: openapi/workday-financials-financial-management-openapi.yml
+  - type: NaftikoCapability
+    url: capabilities/cash-management-bank-accounts.yaml
+  - type: NaftikoCapability
+    url: capabilities/cash-management-bank-transactions.yaml
+  - type: NaftikoCapability
+    url: capabilities/cash-management-cash-forecasts.yaml
+  - type: NaftikoCapability
+    url: capabilities/cash-management-cash-positions.yaml
+  - type: NaftikoCapability
+    url: capabilities/cash-management-payments.yaml
+  - type: NaftikoCapability
+    url: capabilities/expenses-expense-items.yaml
+  - type: NaftikoCapability
+    url: capabilities/expenses-expense-policies.yaml
+  - type: NaftikoCapability
+    url: capabilities/expenses-expense-reports.yaml
+  - type: NaftikoCapability
+    url: capabilities/expenses-receipts.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-accounting-account-reconciliations.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-accounting-accounting-periods.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-accounting-audit-logs.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-accounting-journal-entries.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-accounting-trial-balances.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-accounting-journals.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-accounts-payable.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-accounts-receivable.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-companies.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-cost-centers.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-journal-entries.yaml
+  - type: NaftikoCapability
+    url: capabilities/financial-management-ledger-accounts.yaml
+  - type: NaftikoCapability
+    url: capabilities/procurement-purchase-orders.yaml
+  - type: NaftikoCapability
+    url: capabilities/procurement-purchase-requisitions.yaml
+  - type: NaftikoCapability
+    url: capabilities/procurement-receipts.yaml
+  - type: NaftikoCapability
+    url: capabilities/procurement-supplier-contracts.yaml
+  - type: NaftikoCapability
+    url: capabilities/procurement-suppliers.yaml
+  - type: NaftikoCapability
+    url: capabilities/reporting-custom-reports.yaml
+  - type: NaftikoCapability
+    url: capabilities/reporting-report-execution.yaml
+  - type: NaftikoCapability
+    url: capabilities/reporting-report-prompts.yaml
+  - type: NaftikoCapability
+    url: capabilities/reporting-reports.yaml
+  - type: NaftikoCapability
+    url: capabilities/revenue-management-billing-schedules.yaml
+  - type: NaftikoCapability
+    url: capabilities/revenue-management-revenue-contracts.yaml
+  - type: NaftikoCapability
+    url: capabilities/revenue-management-revenue-recognition.yaml
+  - type: NaftikoCapability
+    url: capabilities/revenue-management-revenue-schedules.yaml
+- name: Workday Revenue Management API
+  description: API for managing revenue recognition, contracts, billing, and revenue accounting in compliance with ASC 606
+    and IFRS 15.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/revenue-management.html
+  baseURL: https://api.workday.com/revenueManagement
+  tags:
+  - Billing
+  - Contracts
+  - Revenue Recognition
+  - Subscription Management
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Revenue_Management/v38.2/Revenue_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-revenue-management-openapi.yml
+- name: Workday Expenses API
+  description: API for expense report submission, approval workflows, receipt management, and expense policy enforcement.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/expense-management.html
+  baseURL: https://api.workday.com/expenses
+  tags:
+  - Approvals
+  - Expense Reports
+  - Receipt Management
+  - Travel Expenses
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Expenses/v38.2/Expenses.json
+  - type: OpenAPI
+    url: openapi/workday-financials-expenses-openapi.yml
+- name: Workday Procurement API
+  description: API for purchase requisitions, purchase orders, supplier management, and procurement processes.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/procurement.html
+  baseURL: https://api.workday.com/procurement
+  tags:
+  - Procurement
+  - Purchase Orders
+  - Requisitions
+  - Suppliers
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Resource_Management/v38.2/Resource_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-procurement-openapi.yml
+- name: Workday Cash Management API
+  description: API for managing cash positions, bank accounts, transactions, and cash forecasting.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/cash-management.html
+  baseURL: https://api.workday.com/cashManagement
+  tags:
+  - Bank Accounts
+  - Cash Management
+  - Forecasting
+  - Treasury
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Cash_Management/v38.2/Cash_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-cash-management-openapi.yml
+- name: Workday Financial Accounting API
+  description: API for journal entries, account reconciliation, period close activities, and audit trails.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/financial-accounting.html
+  baseURL: https://api.workday.com/financialAccounting
+  tags:
+  - Account Reconciliation
+  - Audit
+  - Journal Entries
+  - Period Close
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
+  - type: OpenAPI
+    url: openapi/workday-financials-financial-accounting-openapi.yml
+- name: Workday Reporting API
+  description: API for accessing financial reports, custom report execution, and analytics data extraction.
+  image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
+  humanURL: https://www.workday.com/en-us/products/financial-management/financial-reporting.html
+  baseURL: https://api.workday.com/reporting
+  tags:
+  - Analytics
+  - Custom Reports
+  - Financial Reports
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: OpenAPI
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Report_as_a_Service/v38.2/Report_as_a_Service.json
+  - type: OpenAPI
+    url: openapi/workday-financials-reporting-openapi.yml
+common:
+- type: Developer Portal
+  url: https://community.workday.com/developer
+- type: Authentication
+  url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- type: RateLimits
+  url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/rate-limiting.html
+- type: StatusPage
+  url: https://status.workday.com/
+- type: Support
+  url: https://www.workday.com/en-us/company/latest/support.html
+- type: TermsOfService
+  url: https://www.workday.com/en-us/legal.html
+- type: PrivacyPolicy
+  url: https://www.workday.com/en-us/privacy.html
+- type: Contact
+  url: https://www.workday.com/en-us/company/latest/contact-us.html
+- type: JSONLD
+  url: json-ld/workday-financials-context.jsonld
+- type: JSONSchema
+  url: json-schema/workday-financials-journal-entry-schema.json
+- type: JSONSchema
+  url: json-schema/workday-financials-supplier-invoice-schema.json
+- type: Spectral Rules
+  url: rules/workday-financials-rules.yml
+- type: Naftiko Capabilities
+  url: capabilities/financial-close.yaml
+- type: Naftiko Capabilities
+  url: capabilities/procure-to-pay.yaml
+- type: Vocabulary
+  url: vocabulary/workday-financials-vocabulary.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Reporting API — Report Prompts
+  description: 'Workday Financials Workday Reporting API — Report Prompts. 1 operations. Lead operation: Workday Financials
+    Get report prompts. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Report Prompts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reporting-report-prompts
+    baseUri: https://{tenant}.workday.com/api/reporting/v38.2
+    description: Workday Financials Workday Reporting API — Report Prompts business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: reports-id-prompts
+      path: /reports/{id}/prompts
+      operations:
+      - name: getreportprompts
+        method: GET
+        description: Workday Financials Get report prompts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: reporting-report-prompts-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Reporting API — Report Prompts. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/reports/{id}/prompts
+      name: reports-id-prompts
+      description: REST surface for reports-id-prompts.
+      operations:
+      - method: GET
+        name: getreportprompts
+        description: Workday Financials Get report prompts
+        call: reporting-report-prompts.getreportprompts
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reporting-report-prompts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Reporting API — Report Prompts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-get-report-prompts
+      description: Workday Financials Get report prompts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-report-prompts.getreportprompts
+      outputParameters:
+      - type: object
+        mapping: $.

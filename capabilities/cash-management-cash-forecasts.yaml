@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Cash Management API — Cash Forecasts
+  description: 'Workday Financials Workday Cash Management API — Cash Forecasts. 1 operations. Lead operation: Workday Financials
+    List cash forecasts. Self-contained Naftiko capability covering one Workday Financials business surface.'
+  tags:
+  - Workday Financials
+  - Cash Forecasts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cash-management-cash-forecasts
+    baseUri: https://{tenant}.workday.com/api/cashManagement/v38.2
+    description: Workday Financials Workday Cash Management API — Cash Forecasts business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: cashForecasts
+      path: /cashForecasts
+      operations:
+      - name: listcashforecasts
+        method: GET
+        description: Workday Financials List cash forecasts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: forecastDate
+          in: query
+          type: string
+          description: Forecast for this date
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cash-management-cash-forecasts-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Cash Management API — Cash Forecasts. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/cashforecasts
+      name: cashforecasts
+      description: REST surface for cashForecasts.
+      operations:
+      - method: GET
+        name: listcashforecasts
+        description: Workday Financials List cash forecasts
+        call: cash-management-cash-forecasts.listcashforecasts
+        with:
+          forecastDate: rest.forecastDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cash-management-cash-forecasts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Cash Management API — Cash Forecasts. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-cash-forecasts
+      description: Workday Financials List cash forecasts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cash-management-cash-forecasts.listcashforecasts
+      with:
+        forecastDate: tools.forecastDate
+      outputParameters:
+      - type: object
+        mapping: $.

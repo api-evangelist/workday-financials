@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Financials Workday Cash Management API — Bank Transactions
+  description: 'Workday Financials Workday Cash Management API — Bank Transactions. 1 operations. Lead operation: Workday
+    Financials List bank transactions for an account. Self-contained Naftiko capability covering one Workday Financials business
+    surface.'
+  tags:
+  - Workday Financials
+  - Bank Transactions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_FINANCIALS_API_KEY: WORKDAY_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cash-management-bank-transactions
+    baseUri: https://{tenant}.workday.com/api/cashManagement/v38.2
+    description: Workday Financials Workday Cash Management API — Bank Transactions business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: bankAccounts-id-transactions
+      path: /bankAccounts/{id}/transactions
+      operations:
+      - name: listbanktransactions
+        method: GET
+        description: Workday Financials List bank transactions for an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fromDate
+          in: query
+          type: string
+          description: Filter transactions from this date
+        - name: toDate
+          in: query
+          type: string
+          description: Filter transactions to this date
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cash-management-bank-transactions-rest
+    port: 8080
+    description: REST adapter for Workday Financials Workday Cash Management API — Bank Transactions. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/bankaccounts/{id}/transactions
+      name: bankaccounts-id-transactions
+      description: REST surface for bankAccounts-id-transactions.
+      operations:
+      - method: GET
+        name: listbanktransactions
+        description: Workday Financials List bank transactions for an account
+        call: cash-management-bank-transactions.listbanktransactions
+        with:
+          fromDate: rest.fromDate
+          toDate: rest.toDate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cash-management-bank-transactions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Financials Workday Cash Management API — Bank Transactions. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: workday-financials-list-bank-transactions
+      description: Workday Financials List bank transactions for an account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cash-management-bank-transactions.listbanktransactions
+      with:
+        fromDate: tools.fromDate
+        toDate: tools.toDate
+      outputParameters:
+      - type: object
+        mapping: $.
