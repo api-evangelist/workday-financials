@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExpenseItemCreate",
+  "title": "ExpenseItemCreate",
+  "type": "object",
+  "required": [
+    "expenseItemType",
+    "amount",
+    "date"
+  ],
+  "properties": {
+    "expenseItemType": {
+      "type": "string",
+      "description": "Type of expense"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Expense amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the expense was incurred"
+    },
+    "memo": {
+      "type": "string",
+      "description": "Description of the expense"
+    },
+    "receipt": {
+      "$ref": "#/components/schemas/ReceiptRef"
+    }
+  }
+}

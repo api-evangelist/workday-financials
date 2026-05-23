@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportDefinition",
+  "title": "ReportDefinition",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the report"
+    },
+    "name": {
+      "type": "string",
+      "description": "Report name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Report description"
+    },
+    "category": {
+      "type": "string",
+      "description": "Report category"
+    },
+    "outputFormat": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "json",
+          "csv",
+          "xml"
+        ]
+      },
+      "description": "Supported output formats"
+    },
+    "hasPrompts": {
+      "type": "boolean",
+      "description": "Whether the report requires prompt values"
+    },
+    "owner": {
+      "$ref": "#/components/schemas/WorkerRef"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExpenseReportUpdate",
+  "title": "ExpenseReportUpdate",
+  "type": "object",
+  "properties": {
+    "memo": {
+      "type": "string",
+      "description": "Updated memo or description"
+    },
+    "expenseDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Updated expense date"
+    }
+  }
+}

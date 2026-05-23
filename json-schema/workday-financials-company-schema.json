@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Company",
+  "title": "Company",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the company"
+    },
+    "name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "organizationCode": {
+      "type": "string",
+      "description": "Organization reference code"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the company is active"
+    }
+  }
+}

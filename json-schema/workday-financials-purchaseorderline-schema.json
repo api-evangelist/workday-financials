@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PurchaseOrderLine",
+  "title": "PurchaseOrderLine",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the line item"
+    },
+    "lineNumber": {
+      "type": "integer",
+      "description": "Line item number"
+    },
+    "description": {
+      "type": "string",
+      "description": "Line item description"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double",
+      "description": "Quantity ordered"
+    },
+    "unitCost": {
+      "type": "number",
+      "format": "double",
+      "description": "Cost per unit"
+    },
+    "extendedAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total line amount"
+    },
+    "spendCategory": {
+      "type": "string",
+      "description": "Spend category for the line item"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankAccount",
+  "title": "BankAccount",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the bank account"
+    },
+    "accountName": {
+      "type": "string",
+      "description": "Name of the bank account"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Bank account number (masked)"
+    },
+    "bankName": {
+      "type": "string",
+      "description": "Name of the financial institution"
+    },
+    "routingNumber": {
+      "type": "string",
+      "description": "Bank routing number"
+    },
+    "accountType": {
+      "type": "string",
+      "enum": [
+        "Checking",
+        "Savings",
+        "MoneyMarket",
+        "Investment"
+      ],
+      "description": "Type of bank account"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "currentBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Current account balance"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the account is active"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

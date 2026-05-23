@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportPrompt",
+  "title": "ReportPrompt",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Prompt parameter name"
+    },
+    "label": {
+      "type": "string",
+      "description": "Prompt display label"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether the prompt is required"
+    },
+    "dataType": {
+      "type": "string",
+      "description": "Expected data type for the prompt value"
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "Default value for the prompt"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Payment",
+  "title": "Payment",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the payment"
+    },
+    "paymentNumber": {
+      "type": "string",
+      "description": "Payment reference number"
+    },
+    "payee": {
+      "type": "string",
+      "description": "Payment recipient"
+    },
+    "paymentDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the payment"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Payment amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": [
+        "Check",
+        "ACH",
+        "Wire",
+        "EFT"
+      ],
+      "description": "Method of payment"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Processed",
+        "Canceled"
+      ],
+      "description": "Payment status"
+    },
+    "bankAccount": {
+      "$ref": "#/components/schemas/BankAccountRef"
+    }
+  }
+}

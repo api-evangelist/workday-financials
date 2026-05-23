@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExpenseReportCreate",
+  "title": "ExpenseReportCreate",
+  "type": "object",
+  "required": [
+    "memo",
+    "expenseDate",
+    "company"
+  ],
+  "properties": {
+    "memo": {
+      "type": "string",
+      "description": "Expense report memo or description"
+    },
+    "expenseDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Primary expense date"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    }
+  }
+}

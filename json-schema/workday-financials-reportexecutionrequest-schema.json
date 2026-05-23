@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportExecutionRequest",
+  "title": "ReportExecutionRequest",
+  "type": "object",
+  "properties": {
+    "prompts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs of prompt parameter names and values"
+    }
+  }
+}

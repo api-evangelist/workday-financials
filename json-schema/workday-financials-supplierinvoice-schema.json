@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SupplierInvoice",
+  "title": "SupplierInvoice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the supplier invoice"
+    },
+    "invoiceNumber": {
+      "type": "string",
+      "description": "Invoice number"
+    },
+    "supplier": {
+      "$ref": "#/components/schemas/SupplierRef"
+    },
+    "invoiceDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date on the invoice"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment due date"
+    },
+    "totalAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total invoice amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Approved",
+        "Paid",
+        "Canceled"
+      ],
+      "description": "Current invoice status"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

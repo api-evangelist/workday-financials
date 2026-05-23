@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountReconciliation",
+  "title": "AccountReconciliation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the reconciliation"
+    },
+    "ledgerAccount": {
+      "$ref": "#/components/schemas/LedgerAccountRef"
+    },
+    "reconciliationDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the reconciliation"
+    },
+    "beginningBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Beginning balance"
+    },
+    "endingBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Ending balance"
+    },
+    "variance": {
+      "type": "number",
+      "format": "double",
+      "description": "Variance amount"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Completed",
+        "Approved"
+      ],
+      "description": "Reconciliation status"
+    },
+    "preparedBy": {
+      "$ref": "#/components/schemas/WorkerRef"
+    },
+    "approvedBy": {
+      "$ref": "#/components/schemas/WorkerRef"
+    }
+  }
+}

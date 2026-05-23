@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomerInvoice",
+  "title": "CustomerInvoice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the customer invoice"
+    },
+    "invoiceNumber": {
+      "type": "string",
+      "description": "Invoice number"
+    },
+    "customer": {
+      "$ref": "#/components/schemas/CustomerRef"
+    },
+    "invoiceDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date on the invoice"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment due date"
+    },
+    "totalAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total invoice amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Approved",
+        "Paid",
+        "Overdue",
+        "Canceled"
+      ],
+      "description": "Current invoice status"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

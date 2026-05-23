@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PurchaseRequisitionCreate",
+  "title": "PurchaseRequisitionCreate",
+  "type": "object",
+  "required": [
+    "description",
+    "company"
+  ],
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Requisition description"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RequisitionLineCreate"
+      },
+      "description": "Requisition line items"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SupplierContract",
+  "title": "SupplierContract",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the supplier contract"
+    },
+    "contractNumber": {
+      "type": "string",
+      "description": "Contract reference number"
+    },
+    "supplier": {
+      "$ref": "#/components/schemas/SupplierShortRef"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Contract start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Contract end date"
+    },
+    "totalAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total contract value"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Expired",
+        "Canceled"
+      ],
+      "description": "Current contract status"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExpenseItem",
+  "title": "ExpenseItem",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the expense item"
+    },
+    "expenseItemType": {
+      "type": "string",
+      "description": "Type of expense (e.g., Airfare, Hotel, Meals)"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Expense amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the expense was incurred"
+    },
+    "memo": {
+      "type": "string",
+      "description": "Description of the expense"
+    },
+    "receipt": {
+      "$ref": "#/components/schemas/ReceiptRef"
+    },
+    "costCenter": {
+      "$ref": "#/components/schemas/CostCenterRef"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CashForecast",
+  "title": "CashForecast",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the forecast"
+    },
+    "forecastDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Forecast date"
+    },
+    "projectedInflows": {
+      "type": "number",
+      "format": "double",
+      "description": "Projected cash inflows"
+    },
+    "projectedOutflows": {
+      "type": "number",
+      "format": "double",
+      "description": "Projected cash outflows"
+    },
+    "projectedBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Projected ending balance"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LedgerAccountRef",
+  "title": "LedgerAccountRef",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the ledger account"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the ledger account"
+    }
+  }
+}

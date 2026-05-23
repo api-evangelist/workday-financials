@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Receipt",
+  "title": "Receipt",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the receipt"
+    },
+    "fileName": {
+      "type": "string",
+      "description": "Name of the uploaded receipt file"
+    },
+    "contentType": {
+      "type": "string",
+      "description": "MIME type of the receipt file"
+    },
+    "uploadedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the receipt was uploaded"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the receipt"
+    }
+  }
+}

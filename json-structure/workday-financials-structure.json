@@ -1,0 +1,232 @@
+{
+  "provider": "Workday Financials",
+  "providerId": "workday-financials",
+  "kind": "json-structure",
+  "description": "Structural overview of the Workday Financials API surface; extracted from openapi/.",
+  "schemaCount": 15,
+  "operationCount": 14,
+  "schemas": [
+    {
+      "name": "LedgerAccount",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "JournalEntry",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "JournalEntryCreate",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "journalDate",
+        "company",
+        "lines"
+      ]
+    },
+    {
+      "name": "JournalLine",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "AccountingJournal",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SupplierInvoice",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "CustomerInvoice",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "Company",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CostCenter",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CompanyRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CurrencyRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "LedgerAccountRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CostCenterRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "SupplierRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "CustomerRef",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/ledgerAccounts",
+      "operationId": "listLedgerAccounts",
+      "summary": "Workday Financials List ledger accounts",
+      "tags": [
+        "Ledger Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/ledgerAccounts/{id}",
+      "operationId": "getLedgerAccount",
+      "summary": "Workday Financials Get a ledger account",
+      "tags": [
+        "Ledger Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/journalEntries",
+      "operationId": "listJournalEntries",
+      "summary": "Workday Financials List journal entries",
+      "tags": [
+        "Journal Entries"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/journalEntries",
+      "operationId": "createJournalEntry",
+      "summary": "Workday Financials Create a journal entry",
+      "tags": [
+        "Journal Entries"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/journalEntries/{id}",
+      "operationId": "getJournalEntry",
+      "summary": "Workday Financials Get a journal entry",
+      "tags": [
+        "Journal Entries"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/accountingJournals",
+      "operationId": "listAccountingJournals",
+      "summary": "Workday Financials List accounting journals",
+      "tags": [
+        "Accounting Journals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/supplierInvoices",
+      "operationId": "listSupplierInvoices",
+      "summary": "Workday Financials List supplier invoices",
+      "tags": [
+        "Accounts Payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/supplierInvoices/{id}",
+      "operationId": "getSupplierInvoice",
+      "summary": "Workday Financials Get a supplier invoice",
+      "tags": [
+        "Accounts Payable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/customerInvoices",
+      "operationId": "listCustomerInvoices",
+      "summary": "Workday Financials List customer invoices",
+      "tags": [
+        "Accounts Receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/customerInvoices/{id}",
+      "operationId": "getCustomerInvoice",
+      "summary": "Workday Financials Get a customer invoice",
+      "tags": [
+        "Accounts Receivable"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies",
+      "operationId": "listCompanies",
+      "summary": "Workday Financials List companies",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies/{id}",
+      "operationId": "getCompany",
+      "summary": "Workday Financials Get a company",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/costCenters",
+      "operationId": "listCostCenters",
+      "summary": "Workday Financials List cost centers",
+      "tags": [
+        "Cost Centers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/costCenters/{id}",
+      "operationId": "getCostCenter",
+      "summary": "Workday Financials Get a cost center",
+      "tags": [
+        "Cost Centers"
+      ]
+    }
+  ]
+}

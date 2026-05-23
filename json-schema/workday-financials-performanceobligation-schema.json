@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PerformanceObligation",
+  "title": "PerformanceObligation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the performance obligation"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the performance obligation"
+    },
+    "transactionPrice": {
+      "type": "number",
+      "format": "double",
+      "description": "Allocated transaction price"
+    },
+    "satisfactionMethod": {
+      "type": "string",
+      "enum": [
+        "OverTime",
+        "PointInTime"
+      ],
+      "description": "How the obligation is satisfied"
+    },
+    "percentComplete": {
+      "type": "number",
+      "format": "double",
+      "description": "Percentage of obligation completed",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Satisfied",
+        "Canceled"
+      ],
+      "description": "Current obligation status"
+    }
+  }
+}

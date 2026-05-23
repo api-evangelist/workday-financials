@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PeriodRef",
+  "title": "PeriodRef",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the accounting period"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the period"
+    }
+  }
+}

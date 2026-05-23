@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RevenueRecognitionEvent",
+  "title": "RevenueRecognitionEvent",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the recognition event"
+    },
+    "revenueContract": {
+      "$ref": "#/components/schemas/ContractRef"
+    },
+    "recognitionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date revenue was recognized"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Recognized revenue amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "recognitionType": {
+      "type": "string",
+      "description": "Type of recognition event"
+    }
+  }
+}

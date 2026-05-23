@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JournalLine",
+  "title": "JournalLine",
+  "type": "object",
+  "properties": {
+    "ledgerAccount": {
+      "$ref": "#/components/schemas/LedgerAccountRef"
+    },
+    "debitAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Debit amount for this line"
+    },
+    "creditAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Credit amount for this line"
+    },
+    "memo": {
+      "type": "string",
+      "description": "Line-level memo"
+    },
+    "costCenter": {
+      "$ref": "#/components/schemas/CostCenterRef"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExpensePolicy",
+  "title": "ExpensePolicy",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the expense policy"
+    },
+    "name": {
+      "type": "string",
+      "description": "Expense policy name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Policy description"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the policy is currently active"
+    },
+    "maxAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Maximum allowable amount per expense"
+    },
+    "requiresReceipt": {
+      "type": "boolean",
+      "description": "Whether receipts are required"
+    }
+  }
+}

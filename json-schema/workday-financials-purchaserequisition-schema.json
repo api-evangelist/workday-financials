@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PurchaseRequisition",
+  "title": "PurchaseRequisition",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the purchase requisition"
+    },
+    "requisitionNumber": {
+      "type": "string",
+      "description": "System-generated requisition number"
+    },
+    "requester": {
+      "$ref": "#/components/schemas/WorkerRef"
+    },
+    "description": {
+      "type": "string",
+      "description": "Requisition description"
+    },
+    "totalAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total requisition amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Approved",
+        "Denied",
+        "Canceled"
+      ],
+      "description": "Current requisition status"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the requisition was created"
+    }
+  }
+}

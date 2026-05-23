@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingPeriod",
+  "title": "AccountingPeriod",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the accounting period"
+    },
+    "name": {
+      "type": "string",
+      "description": "Period name (e.g., January 2026)"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Period start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Period end date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Closed",
+        "Locked"
+      ],
+      "description": "Period status"
+    },
+    "fiscalYear": {
+      "type": "string",
+      "description": "Fiscal year reference"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

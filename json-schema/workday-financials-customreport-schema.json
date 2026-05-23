@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomReport",
+  "title": "CustomReport",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the custom report"
+    },
+    "name": {
+      "type": "string",
+      "description": "Custom report name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Custom report description"
+    },
+    "dataSource": {
+      "type": "string",
+      "description": "Data source for the report"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ReportColumn"
+      },
+      "description": "Report columns"
+    },
+    "owner": {
+      "$ref": "#/components/schemas/WorkerRef"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the custom report was created"
+    }
+  }
+}

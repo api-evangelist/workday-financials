@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportColumn",
+  "title": "ReportColumn",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Column name"
+    },
+    "label": {
+      "type": "string",
+      "description": "Column display label"
+    },
+    "dataType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "numeric",
+        "date",
+        "boolean",
+        "currency"
+      ],
+      "description": "Data type of the column"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Supplier",
+  "title": "Supplier",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the supplier"
+    },
+    "supplierName": {
+      "type": "string",
+      "description": "Supplier business name"
+    },
+    "supplierReferenceId": {
+      "type": "string",
+      "description": "Supplier reference identifier"
+    },
+    "taxId": {
+      "type": "string",
+      "description": "Tax identification number"
+    },
+    "paymentTerms": {
+      "type": "string",
+      "description": "Default payment terms"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the supplier is active"
+    },
+    "address": {
+      "$ref": "#/components/schemas/Address"
+    }
+  }
+}

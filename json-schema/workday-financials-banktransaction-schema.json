@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BankTransaction",
+  "title": "BankTransaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the transaction"
+    },
+    "transactionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the transaction"
+    },
+    "description": {
+      "type": "string",
+      "description": "Transaction description"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double",
+      "description": "Transaction amount"
+    },
+    "transactionType": {
+      "type": "string",
+      "enum": [
+        "Debit",
+        "Credit"
+      ],
+      "description": "Type of transaction"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Cleared",
+        "Reconciled"
+      ],
+      "description": "Transaction status"
+    },
+    "referenceNumber": {
+      "type": "string",
+      "description": "External reference number"
+    }
+  }
+}

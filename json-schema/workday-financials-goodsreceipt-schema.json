@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GoodsReceipt",
+  "title": "GoodsReceipt",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the goods receipt"
+    },
+    "receiptNumber": {
+      "type": "string",
+      "description": "Goods receipt number"
+    },
+    "purchaseOrder": {
+      "$ref": "#/components/schemas/PurchaseOrderRef"
+    },
+    "receiptDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date goods were received"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Received",
+        "Partially Received",
+        "Returned"
+      ],
+      "description": "Receipt status"
+    }
+  }
+}

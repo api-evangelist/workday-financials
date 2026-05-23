@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CostCenter",
+  "title": "CostCenter",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the cost center"
+    },
+    "name": {
+      "type": "string",
+      "description": "Cost center name"
+    },
+    "code": {
+      "type": "string",
+      "description": "Cost center reference code"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the cost center is active"
+    },
+    "manager": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "description": "Cost center manager reference"
+    }
+  }
+}

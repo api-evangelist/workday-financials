@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuditLogEntry",
+  "title": "AuditLogEntry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the audit log entry"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Type of audit event"
+    },
+    "eventDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the event occurred"
+    },
+    "user": {
+      "$ref": "#/components/schemas/WorkerRef"
+    },
+    "resourceType": {
+      "type": "string",
+      "description": "Type of resource affected"
+    },
+    "resourceId": {
+      "type": "string",
+      "description": "ID of the affected resource"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the audit event"
+    },
+    "previousValue": {
+      "type": "string",
+      "description": "Previous value (for change events)"
+    },
+    "newValue": {
+      "type": "string",
+      "description": "New value (for change events)"
+    }
+  }
+}

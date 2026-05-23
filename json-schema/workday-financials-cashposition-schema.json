@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CashPosition",
+  "title": "CashPosition",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the cash position"
+    },
+    "bankAccount": {
+      "$ref": "#/components/schemas/BankAccountRef"
+    },
+    "asOfDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the cash position"
+    },
+    "openingBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Opening balance for the period"
+    },
+    "closingBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Closing balance for the period"
+    },
+    "totalInflows": {
+      "type": "number",
+      "format": "double",
+      "description": "Total cash inflows"
+    },
+    "totalOutflows": {
+      "type": "number",
+      "format": "double",
+      "description": "Total cash outflows"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    }
+  }
+}

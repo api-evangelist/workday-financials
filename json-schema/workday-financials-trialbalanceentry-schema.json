@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TrialBalanceEntry",
+  "title": "TrialBalanceEntry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the trial balance entry"
+    },
+    "ledgerAccount": {
+      "$ref": "#/components/schemas/LedgerAccountRef"
+    },
+    "accountingPeriod": {
+      "$ref": "#/components/schemas/PeriodRef"
+    },
+    "debitBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Debit balance amount"
+    },
+    "creditBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Credit balance amount"
+    },
+    "netBalance": {
+      "type": "number",
+      "format": "double",
+      "description": "Net balance amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    }
+  }
+}

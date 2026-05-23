@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountingJournal",
+  "title": "AccountingJournal",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the accounting journal"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the accounting journal"
+    },
+    "journalType": {
+      "type": "string",
+      "description": "Type of accounting journal"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the journal is active"
+    }
+  }
+}

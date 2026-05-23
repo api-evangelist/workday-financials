@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PurchaseOrder",
+  "title": "PurchaseOrder",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the purchase order"
+    },
+    "orderNumber": {
+      "type": "string",
+      "description": "Purchase order number"
+    },
+    "supplier": {
+      "$ref": "#/components/schemas/SupplierShortRef"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the order was placed"
+    },
+    "totalAmount": {
+      "type": "number",
+      "format": "double",
+      "description": "Total order amount"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Issued",
+        "Received",
+        "Closed",
+        "Canceled"
+      ],
+      "description": "Current order status"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

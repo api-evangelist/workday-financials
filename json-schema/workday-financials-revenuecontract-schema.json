@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RevenueContract",
+  "title": "RevenueContract",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the revenue contract"
+    },
+    "contractNumber": {
+      "type": "string",
+      "description": "Contract reference number"
+    },
+    "customer": {
+      "$ref": "#/components/schemas/CustomerRef"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Contract start date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Contract end date"
+    },
+    "totalContractValue": {
+      "type": "number",
+      "format": "double",
+      "description": "Total contract value"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Completed",
+        "Canceled"
+      ],
+      "description": "Current contract status"
+    },
+    "revenueRecognitionStandard": {
+      "type": "string",
+      "enum": [
+        "ASC_606",
+        "IFRS_15"
+      ],
+      "description": "Revenue recognition standard applied"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

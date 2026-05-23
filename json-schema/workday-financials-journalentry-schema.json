@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JournalEntry",
+  "title": "JournalEntry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the journal entry"
+    },
+    "journalNumber": {
+      "type": "string",
+      "description": "System-generated journal entry number"
+    },
+    "journalDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the journal entry"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the journal entry"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Approved",
+        "Posted",
+        "Reversed"
+      ],
+      "description": "Current status of the journal entry"
+    },
+    "journalSource": {
+      "type": "string",
+      "description": "Source of the journal entry"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "totalDebit": {
+      "type": "number",
+      "format": "double",
+      "description": "Total debit amount"
+    },
+    "totalCredit": {
+      "type": "number",
+      "format": "double",
+      "description": "Total credit amount"
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JournalLine"
+      }
+    },
+    "accountingPeriod": {
+      "$ref": "#/components/schemas/PeriodRef"
+    },
+    "createdBy": {
+      "$ref": "#/components/schemas/WorkerRef"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the journal entry was created"
+    }
+  }
+}

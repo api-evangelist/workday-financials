@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LedgerAccount",
+  "title": "LedgerAccount",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID (WID) for the ledger account"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Account number in the chart of accounts"
+    },
+    "accountName": {
+      "type": "string",
+      "description": "Display name of the ledger account"
+    },
+    "accountType": {
+      "type": "string",
+      "enum": [
+        "Asset",
+        "Liability",
+        "Equity",
+        "Revenue",
+        "Expense"
+      ],
+      "description": "Classification type of the account"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the account is currently active"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyRef"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyRef"
+    }
+  }
+}

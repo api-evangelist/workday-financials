@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomerRef",
+  "title": "CustomerRef",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the customer"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the customer"
+    }
+  }
+}

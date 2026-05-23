@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CurrencyRef",
+  "title": "CurrencyRef",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the currency"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Currency code (e.g., USD, EUR)"
+    }
+  }
+}

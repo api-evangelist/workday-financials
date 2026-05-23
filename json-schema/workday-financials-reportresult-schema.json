@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportResult",
+  "title": "ReportResult",
+  "type": "object",
+  "properties": {
+    "reportName": {
+      "type": "string",
+      "description": "Name of the executed report"
+    },
+    "executedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the report was executed"
+    },
+    "totalRows": {
+      "type": "integer",
+      "description": "Total number of rows in the result"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ReportColumn"
+      },
+      "description": "Column definitions"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "description": "Report data rows"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RequisitionLineCreate",
+  "title": "RequisitionLineCreate",
+  "type": "object",
+  "required": [
+    "description",
+    "quantity",
+    "unitCost"
+  ],
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Line item description"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double",
+      "description": "Quantity requested"
+    },
+    "unitCost": {
+      "type": "number",
+      "format": "double",
+      "description": "Cost per unit"
+    },
+    "supplier": {
+      "$ref": "#/components/schemas/SupplierShortRef"
+    }
+  }
+}
