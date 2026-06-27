@@ -146,7 +146,7 @@ apis:
       - type: OpenAPI
         url: openapi/workday-financials-reporting-openapi.yml
 common:
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://community.workday.com/developer
   - type: Authentication
     url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
@@ -168,7 +168,7 @@ common:
     url: json-schema/workday-financials-journal-entry-schema.json
   - type: JSONSchema
     url: json-schema/workday-financials-supplier-invoice-schema.json
-  - type: Spectral Rules
+  - type: SpectralRules
     url: rules/workday-financials-rules.yml
   - type: Vocabulary
     url: vocabulary/workday-financials-vocabulary.yml
