@@ -146,6 +146,14 @@ apis:
       - type: OpenAPI
         url: openapi/workday-financials-reporting-openapi.yml
 common:
+  - type: TrustCenter
+    url: security/workday-financials-trust-center.yml
+  - type: DomainSecurity
+    url: security/workday-financials-domain-security.yml
+  - type: Authentication
+    url: authentication/workday-financials-authentication.yml
+  - type: Blog
+    url: https://newsroom.workday.com/
   - type: DeveloperPortal
     url: https://community.workday.com/developer
   - type: Authentication
