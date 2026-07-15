@@ -146,6 +146,8 @@ apis:
       - type: OpenAPI
         url: openapi/workday-financials-reporting-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/workday-financials-agentic-access.yml
   - type: TrustCenter
     url: security/workday-financials-trust-center.yml
   - type: DomainSecurity
