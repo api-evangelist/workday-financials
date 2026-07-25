@@ -1,0 +1,179 @@
+openapi: 3.1.0
+info:
+  title: Workday Financials Workday Cash Management Account Reconciliations Accounts Payable API
+  description: API for managing cash positions, bank accounts, transactions, and cash forecasting within Workday Cash Management.
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://{tenant}.workday.com/api/cashManagement/v38.2
+  description: Workday Cash Management Production
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
+security:
+- bearerAuth: []
+tags:
+- name: Accounts Payable
+  description: Manage supplier invoices and payment processing
+paths:
+  /supplierInvoices:
+    get:
+      operationId: listSupplierInvoices
+      summary: Workday Financials List supplier invoices
+      description: Retrieve a collection of supplier invoices for accounts payable.
+      tags:
+      - Accounts Payable
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: status
+        in: query
+        description: Filter invoices by status
+        schema:
+          type: string
+          enum:
+          - Draft
+          - Approved
+          - Paid
+          - Canceled
+      responses:
+        '200':
+          description: Supplier invoices retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SupplierInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /supplierInvoices/{id}:
+    get:
+      operationId: getSupplierInvoice
+      summary: Workday Financials Get a supplier invoice
+      description: Retrieve details of a specific supplier invoice.
+      tags:
+      - Accounts Payable
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Supplier invoice details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+  schemas:
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    SupplierInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the supplier invoice
+        invoiceNumber:
+          type: string
+          description: Invoice number
+        supplier:
+          $ref: '#/components/schemas/SupplierRef'
+        invoiceDate:
+          type: string
+          format: date
+          description: Date on the invoice
+        dueDate:
+          type: string
+          format: date
+          description: Payment due date
+        totalAmount:
+          type: number
+          format: double
+          description: Total invoice amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        status:
+          type: string
+          enum:
+          - Draft
+          - Approved
+          - Paid
+          - Canceled
+          description: Current invoice status
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+    SupplierRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the supplier
+        descriptor:
+          type: string
+          description: Display name of the supplier
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+externalDocs:
+  description: Workday Cash Management API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html

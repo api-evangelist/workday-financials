@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: Workday Financials Workday Cash Management Account Reconciliations Expense Items API
+  description: API for managing cash positions, bank accounts, transactions, and cash forecasting within Workday Cash Management.
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://{tenant}.workday.com/api/cashManagement/v38.2
+  description: Workday Cash Management Production
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
+security:
+- bearerAuth: []
+tags:
+- name: Expense Items
+  description: Manage individual expense line items
+paths:
+  /expenseReports/{id}/expenseItems:
+    get:
+      operationId: listExpenseItems
+      summary: Workday Financials List expense items for a report
+      description: Retrieve expense line items for a specific expense report.
+      tags:
+      - Expense Items
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Expense items retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExpenseItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addExpenseItem
+      summary: Workday Financials Add an expense item to a report
+      description: Add a new expense line item to an existing expense report.
+      tags:
+      - Expense Items
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseItemCreate'
+      responses:
+        '201':
+          description: Expense item added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid data
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+  schemas:
+    ReceiptRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the receipt
+        descriptor:
+          type: string
+          description: Display name of the receipt
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    CostCenterRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the cost center
+        descriptor:
+          type: string
+          description: Display name of the cost center
+    ExpenseItemCreate:
+      type: object
+      required:
+      - expenseItemType
+      - amount
+      - date
+      properties:
+        expenseItemType:
+          type: string
+          description: Type of expense
+        amount:
+          type: number
+          format: double
+          description: Expense amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        date:
+          type: string
+          format: date
+          description: Date the expense was incurred
+        memo:
+          type: string
+          description: Description of the expense
+        receipt:
+          $ref: '#/components/schemas/ReceiptRef'
+    ExpenseItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the expense item
+        expenseItemType:
+          type: string
+          description: Type of expense (e.g., Airfare, Hotel, Meals)
+        amount:
+          type: number
+          format: double
+          description: Expense amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        date:
+          type: string
+          format: date
+          description: Date the expense was incurred
+        memo:
+          type: string
+          description: Description of the expense
+        receipt:
+          $ref: '#/components/schemas/ReceiptRef'
+        costCenter:
+          $ref: '#/components/schemas/CostCenterRef'
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+externalDocs:
+  description: Workday Cash Management API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html

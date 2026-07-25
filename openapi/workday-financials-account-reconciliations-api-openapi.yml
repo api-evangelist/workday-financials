@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: Workday Financials Workday Cash Management Account Reconciliations API
+  description: API for managing cash positions, bank accounts, transactions, and cash forecasting within Workday Cash Management.
+  version: v38.2
+  contact:
+    name: Workday Support
+    url: https://www.workday.com/en-us/company/latest/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://{tenant}.workday.com/api/cashManagement/v38.2
+  description: Workday Cash Management Production
+  variables:
+    tenant:
+      description: Workday tenant identifier
+      default: your-tenant
+security:
+- bearerAuth: []
+tags:
+- name: Account Reconciliations
+  description: Manage account reconciliation processes
+paths:
+  /accountReconciliations:
+    get:
+      operationId: listAccountReconciliations
+      summary: Workday Financials List account reconciliations
+      description: Retrieve a collection of account reconciliations.
+      tags:
+      - Account Reconciliations
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - name: status
+        in: query
+        description: Filter by reconciliation status
+        schema:
+          type: string
+          enum:
+          - InProgress
+          - Completed
+          - Approved
+      responses:
+        '200':
+          description: Account reconciliations retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccountReconciliation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /accountReconciliations/{id}:
+    get:
+      operationId: getAccountReconciliation
+      summary: Workday Financials Get an account reconciliation
+      description: Retrieve details of a specific account reconciliation.
+      tags:
+      - Account Reconciliations
+      parameters:
+      - $ref: '#/components/parameters/resourceId'
+      responses:
+        '200':
+          description: Account reconciliation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountReconciliation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    AccountReconciliation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the reconciliation
+        ledgerAccount:
+          $ref: '#/components/schemas/LedgerAccountRef'
+        reconciliationDate:
+          type: string
+          format: date
+          description: Date of the reconciliation
+        beginningBalance:
+          type: number
+          format: double
+          description: Beginning balance
+        endingBalance:
+          type: number
+          format: double
+          description: Ending balance
+        variance:
+          type: number
+          format: double
+          description: Variance amount
+        status:
+          type: string
+          enum:
+          - InProgress
+          - Completed
+          - Approved
+          description: Reconciliation status
+        preparedBy:
+          $ref: '#/components/schemas/WorkerRef'
+        approvedBy:
+          $ref: '#/components/schemas/WorkerRef'
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
+    LedgerAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the ledger account
+        descriptor:
+          type: string
+          description: Display name of the ledger account
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Workday authentication
+externalDocs:
+  description: Workday Cash Management API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
