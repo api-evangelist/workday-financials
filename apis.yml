@@ -3,7 +3,20 @@ name: Workday Financials
 description: >-
   Workday Financials is a cloud-based financial management system that provides comprehensive solutions for accounting,
   procurement, expenses, and financial reporting.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/workday-financials.png
 tags:
   - Accounting
   - Cloud ERP
@@ -14,137 +27,486 @@ modified: '2026-05-19'
 specificationVersion: '0.19'
 url: https://raw.githubusercontent.com/api-evangelist/workday-financials/refs/heads/main/apis.yml
 apis:
-  - name: Workday Financial Management API
-    description: >-
-      Core API for managing financial transactions, general ledger, accounts payable, accounts receivable, and financial
-      reporting.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
-    baseURL: https://api.workday.com/financialManagement
-    tags:
-      - Accounts Payable
-      - Accounts Receivable
-      - Financial Reporting
-      - General Ledger
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: >-
-          https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
-      - type: Authentication
-        url: https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
-      - type: OpenAPI
-        url: openapi/workday-financials-financial-management-openapi.yml
-  - name: Workday Revenue Management API
-    description: >-
-      API for managing revenue recognition, contracts, billing, and revenue accounting in compliance with ASC 606 and
-      IFRS 15.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/revenue-management.html
-    baseURL: https://api.workday.com/revenueManagement
-    tags:
-      - Billing
-      - Contracts
-      - Revenue Recognition
-      - Subscription Management
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: >-
-          https://community.workday.com/sites/default/files/file-hosting/productionapi/Revenue_Management/v38.2/Revenue_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-revenue-management-openapi.yml
-  - name: Workday Expenses API
-    description: API for expense report submission, approval workflows, receipt management, and expense policy enforcement.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/expense-management.html
-    baseURL: https://api.workday.com/expenses
-    tags:
-      - Approvals
-      - Expense Reports
-      - Receipt Management
-      - Travel Expenses
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/Expenses/v38.2/Expenses.json
-      - type: OpenAPI
-        url: openapi/workday-financials-expenses-openapi.yml
-  - name: Workday Procurement API
-    description: API for purchase requisitions, purchase orders, supplier management, and procurement processes.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/procurement.html
-    baseURL: https://api.workday.com/procurement
-    tags:
-      - Procurement
-      - Purchase Orders
-      - Requisitions
-      - Suppliers
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: >-
-          https://community.workday.com/sites/default/files/file-hosting/productionapi/Resource_Management/v38.2/Resource_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-procurement-openapi.yml
-  - name: Workday Cash Management API
-    description: API for managing cash positions, bank accounts, transactions, and cash forecasting.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/cash-management.html
-    baseURL: https://api.workday.com/cashManagement
-    tags:
-      - Bank Accounts
-      - Cash Management
-      - Forecasting
-      - Treasury
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: >-
-          https://community.workday.com/sites/default/files/file-hosting/productionapi/Cash_Management/v38.2/Cash_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-cash-management-openapi.yml
-  - name: Workday Financial Accounting API
-    description: API for journal entries, account reconciliation, period close activities, and audit trails.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/financial-accounting.html
-    baseURL: https://api.workday.com/financialAccounting
-    tags:
-      - Account Reconciliation
-      - Audit
-      - Journal Entries
-      - Period Close
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: >-
-          https://community.workday.com/sites/default/files/file-hosting/productionapi/Financial_Management/v38.2/Financial_Management.json
-      - type: OpenAPI
-        url: openapi/workday-financials-financial-accounting-openapi.yml
-  - name: Workday Reporting API
-    description: API for accessing financial reports, custom report execution, and analytics data extraction.
-    image: https://www.workday.com/content/dam/web/images/logos/workday-logo.svg
-    humanURL: https://www.workday.com/en-us/products/financial-management/financial-reporting.html
-    baseURL: https://api.workday.com/reporting
-    tags:
-      - Analytics
-      - Custom Reports
-      - Financial Reports
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: OpenAPI
-        url: >-
-          https://community.workday.com/sites/default/files/file-hosting/productionapi/Report_as_a_Service/v38.2/Report_as_a_Service.json
-      - type: OpenAPI
-        url: openapi/workday-financials-reporting-openapi.yml
+- aid: workday-financials:workday-financials-account-reconciliations-api
+  name: Workday Financials Account Reconciliations API
+  description: Manage account reconciliation processes
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Account Reconciliations
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-account-reconciliations-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-accounting-journals-api
+  name: Workday Financials Accounting Journals API
+  description: Access and manage accounting journals
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Accounting Journals
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-accounting-journals-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-accounting-periods-api
+  name: Workday Financials Accounting Periods API
+  description: Manage accounting periods and period close
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Accounting Periods
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-accounting-periods-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-accounts-payable-api
+  name: Workday Financials Accounts Payable API
+  description: Manage supplier invoices and payment processing
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Accounts Payable
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-accounts-payable-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-accounts-receivable-api
+  name: Workday Financials Accounts Receivable API
+  description: Manage customer invoices and receivables
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Accounts Receivable
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-accounts-receivable-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-audit-logs-api
+  name: Workday Financials Audit Logs API
+  description: Access financial audit trail data
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-audit-logs-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-bank-accounts-api
+  name: Workday Financials Bank Accounts API
+  description: Manage bank accounts
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-bank-transactions-api
+  name: Workday Financials Bank Transactions API
+  description: Access and manage bank transactions
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Bank Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-bank-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-billing-schedules-api
+  name: Workday Financials Billing Schedules API
+  description: Manage billing schedules and invoice generation
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Billing Schedules
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-billing-schedules-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-cash-forecasts-api
+  name: Workday Financials Cash Forecasts API
+  description: Access cash forecasting data
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Cash Forecasts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-cash-forecasts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-cash-positions-api
+  name: Workday Financials Cash Positions API
+  description: View and manage cash positions
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Cash Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-cash-positions-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-companies-api
+  name: Workday Financials Companies API
+  description: Manage company entities within the financial system
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-companies-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-cost-centers-api
+  name: Workday Financials Cost Centers API
+  description: Manage cost centers for financial allocation
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Cost Centers
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-cost-centers-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-custom-reports-api
+  name: Workday Financials Custom Reports API
+  description: Manage custom report definitions
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Custom Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-custom-reports-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-expense-items-api
+  name: Workday Financials Expense Items API
+  description: Manage individual expense line items
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Expense Items
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-expense-items-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-expense-policies-api
+  name: Workday Financials Expense Policies API
+  description: Access expense policy configurations
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Expense Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-expense-policies-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-expense-reports-api
+  name: Workday Financials Expense Reports API
+  description: Create and manage expense reports
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Expense Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-expense-reports-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-journal-entries-api
+  name: Workday Financials Journal Entries API
+  description: Create and manage journal entries
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Journal Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-journal-entries-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-ledger-accounts-api
+  name: Workday Financials Ledger Accounts API
+  description: Manage general ledger accounts and chart of accounts
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Ledger Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-ledger-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-payments-api
+  name: Workday Financials Payments API
+  description: Manage payment processing
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-payments-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-purchase-orders-api
+  name: Workday Financials Purchase Orders API
+  description: Manage purchase orders
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Purchase Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-purchase-orders-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-purchase-requisitions-api
+  name: Workday Financials Purchase Requisitions API
+  description: Create and manage purchase requisitions
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Purchase Requisitions
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-purchase-requisitions-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-receipts-api
+  name: Workday Financials Receipts API
+  description: Upload and manage expense receipts
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Receipts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-receipts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-report-execution-api
+  name: Workday Financials Report Execution API
+  description: Execute reports and retrieve results
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Report Execution
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-report-execution-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-report-prompts-api
+  name: Workday Financials Report Prompts API
+  description: Manage report prompt values
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Report Prompts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-report-prompts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-reports-api
+  name: Workday Financials Reports API
+  description: Access and manage report definitions
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-reports-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-revenue-contracts-api
+  name: Workday Financials Revenue Contracts API
+  description: Manage revenue contracts and performance obligations
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Revenue Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-revenue-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-revenue-recognition-api
+  name: Workday Financials Revenue Recognition API
+  description: Revenue recognition events and processing
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Revenue Recognition
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-revenue-recognition-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-revenue-schedules-api
+  name: Workday Financials Revenue Schedules API
+  description: Access and manage revenue recognition schedules
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Revenue Schedules
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-revenue-schedules-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-supplier-contracts-api
+  name: Workday Financials Supplier Contracts API
+  description: Manage supplier contracts
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Supplier Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-supplier-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-suppliers-api
+  name: Workday Financials Suppliers API
+  description: Manage supplier records
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Suppliers
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-suppliers-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
+- aid: workday-financials:workday-financials-trial-balances-api
+  name: Workday Financials Trial Balances API
+  description: Access trial balance data
+  humanURL: https://www.workday.com/en-us/products/financial-management/overview.html
+  baseURL: https://api.workday.com/financialManagement
+  tags:
+  - Trial Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-financials-trial-balances-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
 common:
   - type: AgenticAccess
     url: agentic-access/workday-financials-agentic-access.yml
