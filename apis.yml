@@ -24,7 +24,7 @@ tags:
   - Procurement
 created: '2024-01-01'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 url: https://raw.githubusercontent.com/api-evangelist/workday-financials/refs/heads/main/apis.yml
 apis:
 - aid: workday-financials:workday-financials-account-reconciliations-api
