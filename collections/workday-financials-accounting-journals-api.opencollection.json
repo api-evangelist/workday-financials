@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Accounting Journals API",
+    "version": "v38.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounting Journals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Financials List accounting journals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/accountingJournals",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of accounting journals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

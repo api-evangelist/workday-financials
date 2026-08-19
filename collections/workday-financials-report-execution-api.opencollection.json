@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Report Execution API",
+    "version": "v38.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report Execution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Financials Execute a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/reports/:id/execute",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource (WID)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the report"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a report with optional prompt values and retrieve results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

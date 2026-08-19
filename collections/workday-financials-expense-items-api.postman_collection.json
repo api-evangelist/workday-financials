@@ -1,0 +1,527 @@
+{
+  "item": [
+    {
+      "id": "8f09ad76-6bb4-42ca-8c70-ec6df6d26cb7",
+      "name": "Expense Items",
+      "description": {
+        "content": "Manage individual expense line items",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c356425-c6f8-4ecc-9b34-1bfaa0c56604",
+          "name": "Workday Financials List expense items for a report",
+          "request": {
+            "name": "Workday Financials List expense items for a report",
+            "description": {
+              "content": "Retrieve expense line items for a specific expense report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "expenseReports",
+                ":id",
+                "expenseItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the resource (WID)"
+                },
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d203cb80-9a8d-43ce-88ce-04f3e3a9b709",
+              "name": "Expense items retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expenseReports",
+                    ":id",
+                    "expenseItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4981,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"expenseItemType\": \"string\",\n      \"amount\": 5759.264075464332,\n      \"currency\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"date\": \"2017-09-18\",\n      \"memo\": \"string\",\n      \"receipt\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"expenseItemType\": \"string\",\n      \"amount\": 5618.324395300952,\n      \"currency\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"date\": \"2015-01-06\",\n      \"memo\": \"string\",\n      \"receipt\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "258ff929-5d46-4ce2-b3ec-b9e023ea843c",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expenseReports",
+                    ":id",
+                    "expenseItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "28d9a919-d836-44b5-9c3d-ab48d1c75ecc",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expenseReports",
+                    ":id",
+                    "expenseItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "438dcff9-f209-46c9-bbf2-5ed629f110a5",
+          "name": "Workday Financials Add an expense item to a report",
+          "request": {
+            "name": "Workday Financials Add an expense item to a report",
+            "description": {
+              "content": "Add a new expense line item to an existing expense report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "expenseReports",
+                ":id",
+                "expenseItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the resource (WID)"
+                },
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expenseItemType\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"date\": \"<date>\",\n  \"currency\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"memo\": \"<string>\",\n  \"receipt\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "33c9da49-91ae-4a65-9c67-dc9a4a91f882",
+              "name": "Expense item added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expenseReports",
+                    ":id",
+                    "expenseItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expenseItemType\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"date\": \"<date>\",\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"memo\": \"<string>\",\n  \"receipt\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"expenseItemType\": \"string\",\n  \"amount\": 7083.206508143373,\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"date\": \"1956-06-11\",\n  \"memo\": \"string\",\n  \"receipt\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"costCenter\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65155749-5f6b-4afe-a5d1-08e5793e68db",
+              "name": "The request was malformed or contained invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expenseReports",
+                    ":id",
+                    "expenseItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expenseItemType\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"date\": \"<date>\",\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"memo\": \"<string>\",\n  \"receipt\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0526f28-8d7c-47ac-adab-4b7af1d2b8d7",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "expenseReports",
+                    ":id",
+                    "expenseItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expenseItemType\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"date\": \"<date>\",\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"memo\": \"<string>\",\n  \"receipt\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Workday tenant identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-tenant",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.workday.com/api/cashManagement/v38.2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c8635e2e-25b6-44d1-8fc5-1594ec46eb71",
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Expense Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing cash positions, bank accounts, transactions, and cash forecasting within Workday Cash Management.\n\nContact Support:\n Name: Workday Support",
+      "type": "text/plain"
+    }
+  }
+}

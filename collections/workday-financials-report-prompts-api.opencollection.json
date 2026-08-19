@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Report Prompts API",
+    "version": "v38.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report Prompts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Financials Get report prompts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/reports/:id/prompts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource (WID)"
+              }
+            ]
+          },
+          "docs": "Retrieve the prompt definitions for a specific report."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

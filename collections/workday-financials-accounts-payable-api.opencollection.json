@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Accounts Payable API",
+    "version": "v38.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts Payable",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Financials List supplier invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/supplierInvoices",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter invoices by status"
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of supplier invoices for accounts payable."
+        },
+        {
+          "info": {
+            "name": "Workday Financials Get a supplier invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/supplierInvoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource (WID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific supplier invoice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

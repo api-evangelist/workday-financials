@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Cash Positions API",
+    "version": "v38.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cash Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Financials List cash positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/cashPositions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "asOfDate",
+                "value": "",
+                "type": "query",
+                "description": "Cash position as of this date"
+              }
+            ]
+          },
+          "docs": "Retrieve current cash positions across bank accounts."
+        },
+        {
+          "info": {
+            "name": "Workday Financials Get a cash position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.workday.com/api/cashManagement/v38.2/cashPositions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the resource (WID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific cash position."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

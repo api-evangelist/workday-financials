@@ -1,0 +1,1220 @@
+{
+  "item": [
+    {
+      "id": "710ab4b6-2df2-4e8f-96ec-de0e70e43cb4",
+      "name": "Journal Entries",
+      "description": {
+        "content": "Create and manage journal entries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc5ca945-5b3c-4bf7-ae82-b974a78bc89a",
+          "name": "Workday Financials List journal entries",
+          "request": {
+            "name": "Workday Financials List journal entries",
+            "description": {
+              "content": "Retrieve a collection of journal entries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journalEntries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by journal entry status"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "Filter entries from this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "Filter entries to this date"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0413b11a-69bd-4e9e-a14e-45ca2b75a168",
+              "name": "Journal entries retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 8406,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"journalNumber\": \"string\",\n      \"journalDate\": \"1953-02-15\",\n      \"description\": \"string\",\n      \"status\": \"Posted\",\n      \"journalSource\": \"string\",\n      \"company\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"currency\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"totalDebit\": 1449.4007703274237,\n      \"totalCredit\": 6822.34786180965,\n      \"lines\": [\n        {\n          \"ledgerAccount\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"debitAmount\": 4986.774258630156,\n          \"creditAmount\": 5634.030985553162,\n          \"memo\": \"string\",\n          \"costCenter\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          }\n        },\n        {\n          \"ledgerAccount\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"debitAmount\": 3949.4733519423785,\n          \"creditAmount\": 9731.755489570949,\n          \"memo\": \"string\",\n          \"costCenter\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          }\n        }\n      ],\n      \"accountingPeriod\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"createdBy\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"createdOn\": \"1957-02-04T12:06:32.323Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"journalNumber\": \"string\",\n      \"journalDate\": \"1963-10-30\",\n      \"description\": \"string\",\n      \"status\": \"Reversed\",\n      \"journalSource\": \"string\",\n      \"company\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"currency\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"totalDebit\": 5971.205608074576,\n      \"totalCredit\": 5538.967143511788,\n      \"lines\": [\n        {\n          \"ledgerAccount\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"debitAmount\": 3772.2567787074936,\n          \"creditAmount\": 3089.546485805703,\n          \"memo\": \"string\",\n          \"costCenter\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          }\n        },\n        {\n          \"ledgerAccount\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          },\n          \"debitAmount\": 2459.7517543184076,\n          \"creditAmount\": 6248.810374958876,\n          \"memo\": \"string\",\n          \"costCenter\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\"\n          }\n        }\n      ],\n      \"accountingPeriod\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"createdBy\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"createdOn\": \"2006-12-15T09:26:11.375Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e0b18f6-392d-4496-9dd8-f298f94ff789",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "984aa370-94d9-4ced-9273-9b6dc78fbc77",
+          "name": "Workday Financials Create a journal entry",
+          "request": {
+            "name": "Workday Financials Create a journal entry",
+            "description": {
+              "content": "Create a new journal entry for financial accounting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journalEntries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"journalDate\": \"<date>\",\n  \"company\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  },\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"debitAmount\": \"<double>\",\n      \"creditAmount\": \"<double>\",\n      \"memo\": \"<string>\",\n      \"costCenter\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      },\n      \"debitAmount\": \"<double>\",\n      \"creditAmount\": \"<double>\",\n      \"memo\": \"<string>\",\n      \"costCenter\": {\n        \"id\": \"<string>\",\n        \"descriptor\": \"<string>\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"currency\": {\n    \"id\": \"<string>\",\n    \"descriptor\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c092ca24-808c-49dd-9c21-107c3f4c2700",
+              "name": "Journal entry created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"journalDate\": \"<date>\",\n  \"company\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 6148.707461830259,\n      \"creditAmount\": 7079.819694195801,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 7964.713568137418,\n      \"creditAmount\": 8071.911844904001,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"journalNumber\": \"string\",\n  \"journalDate\": \"2016-11-12\",\n  \"description\": \"string\",\n  \"status\": \"Submitted\",\n  \"journalSource\": \"string\",\n  \"company\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"totalDebit\": 5216.723914898723,\n  \"totalCredit\": 2050.0581171085064,\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 587.0307462309665,\n      \"creditAmount\": 5896.407609038025,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 682.2563375086454,\n      \"creditAmount\": 9889.756904403708,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ],\n  \"accountingPeriod\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"createdBy\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"createdOn\": \"2013-03-04T05:35:43.735Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6d9b9f5-eaa6-4f33-9da1-dab2d7d1e04a",
+              "name": "The request was malformed or contained invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"journalDate\": \"<date>\",\n  \"company\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 6148.707461830259,\n      \"creditAmount\": 7079.819694195801,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 7964.713568137418,\n      \"creditAmount\": 8071.911844904001,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdf67f05-f537-406b-9597-5aee7fee3a1e",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"journalDate\": \"<date>\",\n  \"company\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 6148.707461830259,\n      \"creditAmount\": 7079.819694195801,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 7964.713568137418,\n      \"creditAmount\": 8071.911844904001,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07fc883d-ba80-4473-ac68-2e825cd40b1c",
+          "name": "Workday Financials Get a journal entry",
+          "request": {
+            "name": "Workday Financials Get a journal entry",
+            "description": {
+              "content": "Retrieve details of a specific journal entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journalEntries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the resource (WID)"
+                },
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bac41076-4e51-4de2-b58a-c20066f422c0",
+              "name": "Journal entry details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"journalNumber\": \"string\",\n  \"journalDate\": \"2016-11-12\",\n  \"description\": \"string\",\n  \"status\": \"Submitted\",\n  \"journalSource\": \"string\",\n  \"company\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"totalDebit\": 5216.723914898723,\n  \"totalCredit\": 2050.0581171085064,\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 587.0307462309665,\n      \"creditAmount\": 5896.407609038025,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 682.2563375086454,\n      \"creditAmount\": 9889.756904403708,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ],\n  \"accountingPeriod\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"createdBy\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"createdOn\": \"2013-03-04T05:35:43.735Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77f2a321-9dbb-4413-8783-14685fa9c0c7",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e366c190-0165-40a9-a046-d1778b2100c7",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c86cfcb0-c94d-4b5d-9e4c-7824de7a1723",
+          "name": "Workday Financials Post a journal entry",
+          "request": {
+            "name": "Workday Financials Post a journal entry",
+            "description": {
+              "content": "Post an approved journal entry to the general ledger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journalEntries",
+                ":id",
+                "post"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the resource (WID)"
+                },
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f54a6094-1928-4c3d-ae7c-960c2cf026f8",
+              "name": "Journal entry posted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "post"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4bbd38cb-4cf2-467a-9d5b-a9d3148d50a0",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "post"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1257dcb-bf89-4670-8fbd-858b62940b08",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "post"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "729dfa28-a806-4a5b-82c3-46a11c93cbc7",
+              "name": "Journal entry is not in a valid state for posting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "post"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "020d22d8-a13b-41aa-91b1-9680ae88932b",
+          "name": "Workday Financials Reverse a journal entry",
+          "request": {
+            "name": "Workday Financials Reverse a journal entry",
+            "description": {
+              "content": "Create a reversal of a posted journal entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "journalEntries",
+                ":id",
+                "reverse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier of the resource (WID)"
+                },
+                {
+                  "description": "Workday tenant identifier",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reversalDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6effc4d2-710f-4d9e-ac16-8ed7d2bc7cd7",
+              "name": "Journal entry reversed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reversalDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"journalNumber\": \"string\",\n  \"journalDate\": \"2016-11-12\",\n  \"description\": \"string\",\n  \"status\": \"Submitted\",\n  \"journalSource\": \"string\",\n  \"company\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"currency\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"totalDebit\": 5216.723914898723,\n  \"totalCredit\": 2050.0581171085064,\n  \"lines\": [\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 587.0307462309665,\n      \"creditAmount\": 5896.407609038025,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    },\n    {\n      \"ledgerAccount\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      },\n      \"debitAmount\": 682.2563375086454,\n      \"creditAmount\": 9889.756904403708,\n      \"memo\": \"string\",\n      \"costCenter\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\"\n      }\n    }\n  ],\n  \"accountingPeriod\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"createdBy\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\"\n  },\n  \"createdOn\": \"2013-03-04T05:35:43.735Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88b3e458-ba28-4953-9d35-e2461c2f3f71",
+              "name": "Authentication credentials are missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reversalDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1a26a3d-dc8c-40b0-a215-322232c8f301",
+              "name": "The requested resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "journalEntries",
+                    ":id",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier of the resource (WID)"
+                    },
+                    {
+                      "description": "Workday tenant identifier",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reversalDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Workday tenant identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-tenant",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.workday.com/api/cashManagement/v38.2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e67a05f9-8974-4919-9e96-1232dee984d7",
+    "name": "Workday Financials Workday Cash Management Account Reconciliations Journal Entries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing cash positions, bank accounts, transactions, and cash forecasting within Workday Cash Management.\n\nContact Support:\n Name: Workday Support",
+      "type": "text/plain"
+    }
+  }
+}
