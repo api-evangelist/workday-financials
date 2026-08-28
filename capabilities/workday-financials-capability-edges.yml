@@ -1,0 +1,193 @@
+slug: workday-financials
+provider: Workday Financials
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 19
+edges:
+- tag: Journal Entries
+  spec_file: workday-financials-journal-entries-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.95
+  evidence: POST /journalEntries/{id}/post postJournalEntry; POST /journalEntries/{id}/reverse reverseJournalEntry;
+    schemas JournalEntry, JournalLine, LedgerAccountRef, PeriodRef
+  reason: Creating, posting and reversing journal entries against ledger accounts and accounting periods
+    is plainly general ledger accounting.
+- tag: Purchase Orders
+  spec_file: workday-financials-purchase-orders-api-openapi.yml
+  capability_id: BC-500.30
+  capability_id_l1: BC-500
+  capability_name: Purchase Order Management
+  confidence: 0.95
+  evidence: GET /purchaseOrders listPurchaseOrders; GET /purchaseOrders/{id}/lines listPurchaseOrderLines;
+    schemas PurchaseOrder, PurchaseOrderLine, SupplierShortRef
+  reason: Purchase order headers and lines against suppliers is unambiguously Purchase Order Management
+    within procurement.
+- tag: Accounts Payable
+  spec_file: workday-financials-accounts-payable-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.93
+  evidence: GET /supplierInvoices  listSupplierInvoices  Workday Financials List supplier invoices
+  reason: Supplier invoice retrieval is invoice processing / vendor accounting, i.e. Accounts Payable
+    Management.
+- tag: Accounts Receivable
+  spec_file: workday-financials-accounts-receivable-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.93
+  evidence: GET /customerInvoices  listCustomerInvoices  Workday Financials List customer invoices
+  reason: Customer invoicing objects map directly to Accounts Receivable Management.
+- tag: Accounting Periods
+  spec_file: workday-financials-accounting-periods-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.9
+  evidence: POST /accountingPeriods/{id}/close  closeAccountingPeriod  Workday Financials Close an accounting
+    period
+  reason: Period close is explicitly part of General Ledger Management (chart of accounts, journals, period
+    close).
+- tag: Ledger Accounts
+  spec_file: workday-financials-ledger-accounts-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.9
+  evidence: GET /ledgerAccounts listLedgerAccounts; schema LedgerAccount, CompanyRef
+  reason: Exposes the ledger account master (chart of accounts) per company, which is core General Ledger
+    Management.
+- tag: Trial Balances
+  spec_file: workday-financials-trial-balances-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.9
+  evidence: GET /trialBalances listTrialBalances; schemas TrialBalanceEntry, LedgerAccountRef, PeriodRef
+  reason: Trial balance entries against ledger accounts and accounting periods are unambiguously General
+    Ledger Management.
+- tag: Accounting Journals
+  spec_file: workday-financials-accounting-journals-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.88
+  evidence: 'GET /accountingJournals listAccountingJournals ... schemas: AccountingJournal'
+  reason: Accounting journals are the core artefact of general ledger management; operations list journal
+    entries in a financial management system.
+- tag: Cash Positions
+  spec_file: workday-financials-cash-positions-api-openapi.yml
+  capability_id: BC-210.10
+  capability_id_l1: BC-210
+  capability_name: Cash Management
+  confidence: 0.88
+  evidence: GET /cashPositions  listCashPositions  Workday Financials List cash positions
+  reason: Cash positioning is the defining activity of corporate Cash Management.
+- tag: Supplier Contracts
+  spec_file: workday-financials-supplier-contracts-api-openapi.yml
+  capability_id: BC-500.20
+  capability_id_l1: BC-500
+  capability_name: Procurement Contract Management
+  confidence: 0.85
+  evidence: GET /supplierContracts listSupplierContracts — List supplier contracts; schemas SupplierContract,
+    SupplierShortRef
+  reason: Supplier contract records in a procurement-capable financial suite map directly to Procurement
+    Contract Management.
+- tag: Cash Forecasts
+  spec_file: workday-financials-cash-forecasts-api-openapi.yml
+  capability_id: BC-210.20
+  capability_id_l1: BC-210
+  capability_name: Liquidity Management
+  confidence: 0.82
+  evidence: GET /cashForecasts  listCashForecasts ... and cash forecasting within Workday Cash Management
+  reason: Cash forecasting is corporate liquidity forecasting under Treasury Management.
+- tag: Purchase Requisitions
+  spec_file: workday-financials-purchase-requisitions-api-openapi.yml
+  capability_id: BC-500.40
+  capability_id_l1: BC-500
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.8
+  evidence: POST /purchaseRequisitions createPurchaseRequisition; schemas PurchaseRequisition, RequisitionLineCreate,
+    SupplierShortRef
+  reason: Requisition intake and retrieval is day-to-day procure-to-pay operations; the requisition object
+    is explicitly named, though it sits adjacent to purchase order management.
+- tag: Bank Accounts
+  spec_file: workday-financials-bank-accounts-api-openapi.yml
+  capability_id: BC-210.60
+  capability_id_l1: BC-210
+  capability_name: Bank Relationship Management
+  confidence: 0.75
+  evidence: GET /bankAccounts  listBankAccounts ... within Workday Cash Management
+  reason: Corporate bank account master data within a treasury/cash management module aligns with Bank
+    Relationship Management (bank account structure). Some ambiguity vs Cash Management.
+- tag: Suppliers
+  spec_file: workday-financials-suppliers-api-openapi.yml
+  capability_id: BC-510
+  capability_id_l1: BC-510
+  capability_name: Supplier Management
+  confidence: 0.75
+  evidence: GET /suppliers listSuppliers — List suppliers; GET /suppliers/{id} Get a supplier; schemas
+    Supplier, Address, CurrencyRef
+  reason: Supplier master records within a procurement/AP system; Supplier Management at L1, no operation
+    names a specific sub-capability (onboarding, performance, risk), so L2 left null.
+- tag: Bank Transactions
+  spec_file: workday-financials-bank-transactions-api-openapi.yml
+  capability_id: BC-210.10
+  capability_id_l1: BC-210
+  capability_name: Cash Management
+  confidence: 0.72
+  evidence: GET /bankAccounts/{id}/transactions  listBankTransactions  ... for an account
+  reason: Bank statement transactions in a corporate cash management module support cash positioning;
+    treasury Cash Management is the best fit, though reconciliation is also plausible.
+- tag: Account Reconciliations
+  spec_file: workday-financials-account-reconciliations-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.7
+  evidence: 'GET /accountReconciliations  listAccountReconciliations; schemas: LedgerAccountRef, WorkerRef,
+    AccountReconciliation'
+  reason: Ledger account reconciliation records within Workday Cash Management/accounting — general ledger
+    period-close reconciliation rather than securities/nostro reconciliation.
+- tag: Billing Schedules
+  spec_file: workday-financials-billing-schedules-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: 'GET /billingSchedules  listBillingSchedules ... schemas: BillingSchedule, ContractRef'
+  reason: Contract-based billing schedules drive customer invoicing, i.e. Accounts Receivable Management
+    in this ERP context.
+- tag: Cost Centers
+  spec_file: workday-financials-cost-centers-api-openapi.yml
+  capability_id: BC-200.50
+  capability_id_l1: BC-200
+  capability_name: Cost Accounting Management
+  confidence: 0.7
+  evidence: GET /costCenters  listCostCenters  Workday Financials List cost centers
+  reason: Cost centre master data underpins cost objects and cost allocations in Cost Accounting Management;
+    read-only reference data keeps confidence moderate.
+- tag: Expense Reports
+  spec_file: workday-financials-expense-reports-api-openapi.yml
+  capability_id: BC-200
+  capability_id_l1: BC-200
+  capability_name: Financial Management
+  confidence: 0.7
+  evidence: POST /expenseReports createExpenseReport; POST /expenseReports/{id}/submit 'Submit an expense
+    report for approval'
+  reason: Full lifecycle of employee expense reports including submission for approval — a finance (travel
+    & expense) process. No candidate L2 specifically covers expense management, so the L1 Financial Management
+    is the honest level.

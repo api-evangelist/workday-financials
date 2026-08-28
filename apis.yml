@@ -3,6 +3,18 @@ name: Workday Financials
 description: >-
   Workday Financials is a cloud-based financial management system that provides comprehensive solutions for accounting,
   procurement, expenses, and financial reporting.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -508,6 +520,9 @@ apis:
     url: >-
       https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
 common:
+  - type: CapabilityMap
+    url: capabilities/workday-financials-capability-edges.yml
+    name: Workday Financials Business Capability Map
   - type: AgenticAccess
     url: agentic-access/workday-financials-agentic-access.yml
   - type: TrustCenter
