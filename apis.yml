@@ -521,6 +521,8 @@ apis:
     url: >-
       https://doc.workday.com/admin-guide/en-us/workday-web-services/wwsaas/authentication-and-authorization.html
 common:
+  - type: Website
+    url: https://www.workday.com/
   - type: CapabilityMap
     url: capabilities/workday-financials-capability-edges.yml
     name: Workday Financials Business Capability Map
