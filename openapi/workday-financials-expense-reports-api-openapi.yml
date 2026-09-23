@@ -1,15 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Financials Workday Cash Management Account Reconciliations Expense Reports API
-  description: API for managing cash positions, bank accounts, transactions, and cash forecasting within Workday Cash Management.
+  title: Workday Financials Workday Expenses Expense Reports API
+  description: API for expense report submission, approval workflows, receipt management, and expense policy enforcement within Workday Expense Management.
   version: v38.2
   contact:
     name: Workday Support
     url: https://www.workday.com/en-us/company/latest/support.html
   termsOfService: https://www.workday.com/en-us/legal.html
 servers:
-- url: https://{tenant}.workday.com/api/cashManagement/v38.2
-  description: Workday Cash Management Production
+- url: https://{tenant}.workday.com/api/expenses/v38.2
+  description: Workday Expenses Production
   variables:
     tenant:
       description: Workday tenant identifier
@@ -151,6 +151,15 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
     ExpenseReportUpdate:
       type: object
       properties:
@@ -201,15 +210,6 @@ components:
           type: string
           format: date-time
           description: When the report was created
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
     ExpenseReportCreate:
       type: object
       required:
@@ -228,6 +228,15 @@ components:
           $ref: '#/components/schemas/CompanyRef'
         currency:
           $ref: '#/components/schemas/CurrencyRef'
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     WorkerRef:
       type: object
       properties:
@@ -237,16 +246,15 @@ components:
         descriptor:
           type: string
           description: Display name of the worker
-    CompanyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the company
-        descriptor:
-          type: string
-          description: Display name of the company
   parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
     offset:
       name: offset
       in: query
@@ -261,14 +269,6 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
   responses:
     Unauthorized:
       description: Authentication credentials are missing or invalid
@@ -283,5 +283,5 @@ components:
       bearerFormat: JWT
       description: OAuth 2.0 bearer token obtained from Workday authentication
 externalDocs:
-  description: Workday Cash Management API Documentation
+  description: Workday Expenses API Documentation
   url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
