@@ -160,6 +160,42 @@ components:
         descriptor:
           type: string
           description: Display name of the company
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
+    ExpenseReportCreate:
+      type: object
+      required:
+      - memo
+      - expenseDate
+      - company
+      properties:
+        memo:
+          type: string
+          description: Expense report memo or description
+        expenseDate:
+          type: string
+          format: date
+          description: Primary expense date
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     ExpenseReportUpdate:
       type: object
       properties:
@@ -210,42 +246,6 @@ components:
           type: string
           format: date-time
           description: When the report was created
-    ExpenseReportCreate:
-      type: object
-      required:
-      - memo
-      - expenseDate
-      - company
-      properties:
-        memo:
-          type: string
-          description: Expense report memo or description
-        expenseDate:
-          type: string
-          format: date
-          description: Primary expense date
-        company:
-          $ref: '#/components/schemas/CompanyRef'
-        currency:
-          $ref: '#/components/schemas/CurrencyRef'
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the worker
-        descriptor:
-          type: string
-          description: Display name of the worker
   parameters:
     limit:
       name: limit
@@ -270,12 +270,12 @@ components:
       schema:
         type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
     BadRequest:
       description: The request was malformed or contained invalid data
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

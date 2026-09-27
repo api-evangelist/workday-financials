@@ -85,11 +85,6 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    NotFound:
-      description: The requested resource was not found
   schemas:
     BankTransaction:
       type: object
@@ -124,6 +119,11 @@ components:
         referenceNumber:
           type: string
           description: External reference number
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
   securitySchemes:
     bearerAuth:
       type: http

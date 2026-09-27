@@ -95,42 +95,7 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    NotFound:
-      description: The requested resource was not found
   schemas:
-    Address:
-      type: object
-      properties:
-        addressLine1:
-          type: string
-          description: First line of the address
-        addressLine2:
-          type: string
-          description: Second line of the address
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State or province
-        postalCode:
-          type: string
-          description: Postal or ZIP code
-        country:
-          type: string
-          description: Country code
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
     Supplier:
       type: object
       properties:
@@ -156,6 +121,41 @@ components:
           description: Whether the supplier is active
         address:
           $ref: '#/components/schemas/Address'
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    Address:
+      type: object
+      properties:
+        addressLine1:
+          type: string
+          description: First line of the address
+        addressLine2:
+          type: string
+          description: Second line of the address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State or province
+        postalCode:
+          type: string
+          description: Postal or ZIP code
+        country:
+          type: string
+          description: Country code
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
   securitySchemes:
     bearerAuth:
       type: http

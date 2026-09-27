@@ -97,11 +97,29 @@ components:
       schema:
         type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
+    BankAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the bank account
+        descriptor:
+          type: string
+          description: Display name of the bank account
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     CashPosition:
       type: object
       properties:
@@ -132,24 +150,6 @@ components:
           description: Total cash outflows
         currency:
           $ref: '#/components/schemas/CurrencyRef'
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
-    BankAccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the bank account
-        descriptor:
-          type: string
-          description: Display name of the bank account
   securitySchemes:
     bearerAuth:
       type: http

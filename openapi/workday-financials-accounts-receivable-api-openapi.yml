@@ -97,6 +97,15 @@ components:
         descriptor:
           type: string
           description: Display name of the customer
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     CustomerInvoice:
       type: object
       properties:
@@ -133,15 +142,6 @@ components:
           description: Current invoice status
         company:
           $ref: '#/components/schemas/CompanyRef'
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
   parameters:
     limit:
       name: limit
@@ -166,10 +166,10 @@ components:
       schema:
         type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

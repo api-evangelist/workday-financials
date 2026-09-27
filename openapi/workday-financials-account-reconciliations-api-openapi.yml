@@ -99,16 +99,21 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
-    LedgerAccountRef:
+    WorkerRef:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID of the ledger account
+          description: Workday ID of the worker
         descriptor:
           type: string
-          description: Display name of the ledger account
+          description: Display name of the worker
     AccountReconciliation:
       type: object
       properties:
@@ -144,20 +149,15 @@ components:
           $ref: '#/components/schemas/WorkerRef'
         approvedBy:
           $ref: '#/components/schemas/WorkerRef'
-    WorkerRef:
+    LedgerAccountRef:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID of the worker
+          description: Workday ID of the ledger account
         descriptor:
           type: string
-          description: Display name of the worker
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    NotFound:
-      description: The requested resource was not found
+          description: Display name of the ledger account
   securitySchemes:
     bearerAuth:
       type: http

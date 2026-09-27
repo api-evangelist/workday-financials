@@ -75,9 +75,6 @@ components:
       schema:
         type: integer
         default: 0
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   schemas:
     ContractRef:
       type: object
@@ -118,6 +115,9 @@ components:
         recognitionType:
           type: string
           description: Type of recognition event
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

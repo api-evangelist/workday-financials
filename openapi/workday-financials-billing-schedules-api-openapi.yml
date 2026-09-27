@@ -91,6 +91,24 @@ components:
       schema:
         type: string
   schemas:
+    ContractRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the revenue contract
+        descriptor:
+          type: string
+          description: Display name of the contract
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     BillingSchedule:
       type: object
       properties:
@@ -116,29 +134,11 @@ components:
           - Invoiced
           - Canceled
           description: Billing schedule status
-    ContractRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the revenue contract
-        descriptor:
-          type: string
-          description: Display name of the contract
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

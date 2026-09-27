@@ -163,6 +163,15 @@ components:
         description:
           type: string
           description: Description of the receipt
+    PurchaseOrderRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the purchase order
+        descriptor:
+          type: string
+          description: Display name of the purchase order
     GoodsReceipt:
       type: object
       properties:
@@ -185,22 +194,13 @@ components:
           - Partially Received
           - Returned
           description: Receipt status
-    PurchaseOrderRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the purchase order
-        descriptor:
-          type: string
-          description: Display name of the purchase order
   responses:
+    BadRequest:
+      description: The request was malformed or contained invalid data
     Unauthorized:
       description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
-    BadRequest:
-      description: The request was malformed or contained invalid data
   parameters:
     resourceId:
       name: id

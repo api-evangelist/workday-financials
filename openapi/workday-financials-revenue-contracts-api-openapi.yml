@@ -123,6 +123,47 @@ components:
         descriptor:
           type: string
           description: Display name of the customer
+    PerformanceObligation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the performance obligation
+        name:
+          type: string
+          description: Name of the performance obligation
+        transactionPrice:
+          type: number
+          format: double
+          description: Allocated transaction price
+        satisfactionMethod:
+          type: string
+          enum:
+          - OverTime
+          - PointInTime
+          description: How the obligation is satisfied
+        percentComplete:
+          type: number
+          format: double
+          description: Percentage of obligation completed
+          minimum: 0
+          maximum: 100
+        status:
+          type: string
+          enum:
+          - Open
+          - Satisfied
+          - Canceled
+          description: Current obligation status
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     RevenueContract:
       type: object
       properties:
@@ -164,47 +205,6 @@ components:
           description: Revenue recognition standard applied
         company:
           $ref: '#/components/schemas/CompanyRef'
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
-    PerformanceObligation:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID (WID) for the performance obligation
-        name:
-          type: string
-          description: Name of the performance obligation
-        transactionPrice:
-          type: number
-          format: double
-          description: Allocated transaction price
-        satisfactionMethod:
-          type: string
-          enum:
-          - OverTime
-          - PointInTime
-          description: How the obligation is satisfied
-        percentComplete:
-          type: number
-          format: double
-          description: Percentage of obligation completed
-          minimum: 0
-          maximum: 100
-        status:
-          type: string
-          enum:
-          - Open
-          - Satisfied
-          - Canceled
-          description: Current obligation status
   parameters:
     limit:
       name: limit
@@ -229,10 +229,10 @@ components:
       schema:
         type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

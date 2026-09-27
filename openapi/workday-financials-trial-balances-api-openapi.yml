@@ -52,6 +52,22 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
     TrialBalanceEntry:
       type: object
@@ -77,15 +93,6 @@ components:
           description: Net balance amount
         currency:
           $ref: '#/components/schemas/CurrencyRef'
-    LedgerAccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the ledger account
-        descriptor:
-          type: string
-          description: Display name of the ledger account
     PeriodRef:
       type: object
       properties:
@@ -104,22 +111,15 @@ components:
         descriptor:
           type: string
           description: Currency code (e.g., USD, EUR)
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
+    LedgerAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the ledger account
+        descriptor:
+          type: string
+          description: Display name of the ledger account
   responses:
     Unauthorized:
       description: Authentication credentials are missing or invalid

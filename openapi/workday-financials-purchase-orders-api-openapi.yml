@@ -115,47 +115,6 @@ components:
         descriptor:
           type: string
           description: Display name of the company
-    PurchaseOrder:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID (WID) for the purchase order
-        orderNumber:
-          type: string
-          description: Purchase order number
-        supplier:
-          $ref: '#/components/schemas/SupplierShortRef'
-        orderDate:
-          type: string
-          format: date
-          description: Date the order was placed
-        totalAmount:
-          type: number
-          format: double
-          description: Total order amount
-        currency:
-          $ref: '#/components/schemas/CurrencyRef'
-        status:
-          type: string
-          enum:
-          - Draft
-          - Issued
-          - Received
-          - Closed
-          - Canceled
-          description: Current order status
-        company:
-          $ref: '#/components/schemas/CompanyRef'
-    SupplierShortRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the supplier
-        descriptor:
-          type: string
-          description: Display name of the supplier
     PurchaseOrderLine:
       type: object
       properties:
@@ -192,6 +151,47 @@ components:
         descriptor:
           type: string
           description: Currency code (e.g., USD, EUR)
+    SupplierShortRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the supplier
+        descriptor:
+          type: string
+          description: Display name of the supplier
+    PurchaseOrder:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID (WID) for the purchase order
+        orderNumber:
+          type: string
+          description: Purchase order number
+        supplier:
+          $ref: '#/components/schemas/SupplierShortRef'
+        orderDate:
+          type: string
+          format: date
+          description: Date the order was placed
+        totalAmount:
+          type: number
+          format: double
+          description: Total order amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        status:
+          type: string
+          enum:
+          - Draft
+          - Issued
+          - Received
+          - Closed
+          - Canceled
+          description: Current order status
+        company:
+          $ref: '#/components/schemas/CompanyRef'
   parameters:
     limit:
       name: limit
@@ -216,10 +216,10 @@ components:
       schema:
         type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

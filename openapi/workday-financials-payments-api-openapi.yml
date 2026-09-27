@@ -100,11 +100,6 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    NotFound:
-      description: The requested resource was not found
   schemas:
     Payment:
       type: object
@@ -146,15 +141,6 @@ components:
           description: Payment status
         bankAccount:
           $ref: '#/components/schemas/BankAccountRef'
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
     BankAccountRef:
       type: object
       properties:
@@ -164,6 +150,20 @@ components:
         descriptor:
           type: string
           description: Display name of the bank account
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
   securitySchemes:
     bearerAuth:
       type: http
