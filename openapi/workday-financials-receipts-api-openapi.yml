@@ -194,13 +194,6 @@ components:
           - Partially Received
           - Returned
           description: Receipt status
-  responses:
-    BadRequest:
-      description: The request was malformed or contained invalid data
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    NotFound:
-      description: The requested resource was not found
   parameters:
     resourceId:
       name: id
@@ -224,6 +217,13 @@ components:
       schema:
         type: integer
         default: 0
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    BadRequest:
+      description: The request was malformed or contained invalid data
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

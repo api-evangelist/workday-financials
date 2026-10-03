@@ -69,6 +69,33 @@ components:
         type: integer
         default: 0
   schemas:
+    LedgerAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the ledger account
+        descriptor:
+          type: string
+          description: Display name of the ledger account
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    PeriodRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the accounting period
+        descriptor:
+          type: string
+          description: Display name of the period
     TrialBalanceEntry:
       type: object
       properties:
@@ -93,33 +120,6 @@ components:
           description: Net balance amount
         currency:
           $ref: '#/components/schemas/CurrencyRef'
-    PeriodRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the accounting period
-        descriptor:
-          type: string
-          description: Display name of the period
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
-    LedgerAccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the ledger account
-        descriptor:
-          type: string
-          description: Display name of the ledger account
   responses:
     Unauthorized:
       description: Authentication credentials are missing or invalid

@@ -76,13 +76,6 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
     resourceId:
       name: id
       in: path
@@ -90,6 +83,13 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
     CostCenter:
       type: object
@@ -115,10 +115,10 @@ components:
               type: string
           description: Cost center manager reference
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

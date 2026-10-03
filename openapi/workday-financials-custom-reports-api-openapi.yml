@@ -104,25 +104,30 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
-    ReportColumn:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Column name
-        label:
-          type: string
-          description: Column display label
-        dataType:
-          type: string
-          enum:
-          - text
-          - numeric
-          - date
-          - boolean
-          - currency
-          description: Data type of the column
     ReportExecutionRequest:
       type: object
       properties:
@@ -131,6 +136,15 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs of prompt parameter names and values
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
     ReportResult:
       type: object
       properties:
@@ -155,15 +169,6 @@ components:
             type: object
             additionalProperties: true
           description: Report data rows
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the worker
-        descriptor:
-          type: string
-          description: Display name of the worker
     CustomReport:
       type: object
       properties:
@@ -190,29 +195,24 @@ components:
           type: string
           format: date-time
           description: When the custom report was created
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the resource (WID)
-      schema:
-        type: string
+    ReportColumn:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        label:
+          type: string
+          description: Column display label
+        dataType:
+          type: string
+          enum:
+          - text
+          - numeric
+          - date
+          - boolean
+          - currency
+          description: Data type of the column
   responses:
     NotFound:
       description: The requested resource was not found

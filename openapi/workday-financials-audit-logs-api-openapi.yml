@@ -81,15 +81,6 @@ components:
         type: integer
         default: 0
   schemas:
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the worker
-        descriptor:
-          type: string
-          description: Display name of the worker
     AuditLogEntry:
       type: object
       properties:
@@ -120,6 +111,15 @@ components:
         newValue:
           type: string
           description: New value (for change events)
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
   responses:
     Unauthorized:
       description: Authentication credentials are missing or invalid
