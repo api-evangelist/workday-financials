@@ -64,15 +64,32 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    BadRequest:
+      description: The request was malformed or contained invalid data
   schemas:
-    ReportExecutionRequest:
+    ReportColumn:
       type: object
       properties:
-        prompts:
-          type: object
-          additionalProperties:
-            type: string
-          description: Key-value pairs of prompt parameter names and values
+        name:
+          type: string
+          description: Column name
+        label:
+          type: string
+          description: Column display label
+        dataType:
+          type: string
+          enum:
+          - text
+          - numeric
+          - date
+          - boolean
+          - currency
+          description: Data type of the column
     ReportResult:
       type: object
       properties:
@@ -97,24 +114,14 @@ components:
             type: object
             additionalProperties: true
           description: Report data rows
-    ReportColumn:
+    ReportExecutionRequest:
       type: object
       properties:
-        name:
-          type: string
-          description: Column name
-        label:
-          type: string
-          description: Column display label
-        dataType:
-          type: string
-          enum:
-          - text
-          - numeric
-          - date
-          - boolean
-          - currency
-          description: Data type of the column
+        prompts:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs of prompt parameter names and values
   parameters:
     resourceId:
       name: id
@@ -123,13 +130,6 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    BadRequest:
-      description: The request was malformed or contained invalid data
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

@@ -53,6 +53,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
     limit:
       name: limit
       in: query
@@ -61,41 +68,10 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
-    LedgerAccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the ledger account
-        descriptor:
-          type: string
-          description: Display name of the ledger account
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
-    PeriodRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the accounting period
-        descriptor:
-          type: string
-          description: Display name of the period
     TrialBalanceEntry:
       type: object
       properties:
@@ -120,9 +96,33 @@ components:
           description: Net balance amount
         currency:
           $ref: '#/components/schemas/CurrencyRef'
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
+    PeriodRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the accounting period
+        descriptor:
+          type: string
+          description: Display name of the period
+    LedgerAccountRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the ledger account
+        descriptor:
+          type: string
+          description: Display name of the ledger account
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
   securitySchemes:
     bearerAuth:
       type: http

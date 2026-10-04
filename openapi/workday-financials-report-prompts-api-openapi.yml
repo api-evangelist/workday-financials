@@ -49,18 +49,10 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     NotFound:
       description: The requested resource was not found
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the resource (WID)
-      schema:
-        type: string
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
     ReportPrompt:
       type: object
@@ -80,6 +72,14 @@ components:
         defaultValue:
           type: string
           description: Default value for the prompt
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

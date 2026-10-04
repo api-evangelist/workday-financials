@@ -105,7 +105,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -114,21 +133,16 @@ components:
         type: integer
         default: 20
         maximum: 100
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the resource (WID)
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
   schemas:
+    SupplierShortRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the supplier
+        descriptor:
+          type: string
+          description: Display name of the supplier
     PurchaseOrderLine:
       type: object
       properties:
@@ -156,15 +170,15 @@ components:
         spendCategory:
           type: string
           description: Spend category for the line item
-    CurrencyRef:
+    CompanyRef:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID of the currency
+          description: Workday ID of the company
         descriptor:
           type: string
-          description: Currency code (e.g., USD, EUR)
+          description: Display name of the company
     PurchaseOrder:
       type: object
       properties:
@@ -197,29 +211,15 @@ components:
           description: Current order status
         company:
           $ref: '#/components/schemas/CompanyRef'
-    CompanyRef:
+    CurrencyRef:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID of the company
+          description: Workday ID of the currency
         descriptor:
           type: string
-          description: Display name of the company
-    SupplierShortRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the supplier
-        descriptor:
-          type: string
-          description: Display name of the supplier
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
+          description: Currency code (e.g., USD, EUR)
   securitySchemes:
     bearerAuth:
       type: http

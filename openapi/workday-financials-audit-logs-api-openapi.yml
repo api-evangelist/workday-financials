@@ -65,6 +65,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
     limit:
       name: limit
       in: query
@@ -73,14 +80,19 @@ components:
         type: integer
         default: 20
         maximum: 100
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
     AuditLogEntry:
       type: object
       properties:
@@ -111,18 +123,6 @@ components:
         newValue:
           type: string
           description: New value (for change events)
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the worker
-        descriptor:
-          type: string
-          description: Display name of the worker
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http
