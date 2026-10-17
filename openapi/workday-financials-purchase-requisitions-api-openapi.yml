@@ -101,13 +101,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    BadRequest:
-      description: The request was malformed or contained invalid data
   parameters:
     offset:
       name: offset
@@ -131,6 +124,13 @@ components:
         type: integer
         default: 20
         maximum: 100
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid data
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
     PurchaseRequisitionCreate:
       type: object
@@ -150,6 +150,15 @@ components:
           items:
             $ref: '#/components/schemas/RequisitionLineCreate'
           description: Requisition line items
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
     SupplierShortRef:
       type: object
       properties:
@@ -159,15 +168,6 @@ components:
         descriptor:
           type: string
           description: Display name of the supplier
-    CompanyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the company
-        descriptor:
-          type: string
-          description: Display name of the company
     PurchaseRequisition:
       type: object
       properties:
@@ -203,6 +203,24 @@ components:
           type: string
           format: date-time
           description: When the requisition was created
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     RequisitionLineCreate:
       type: object
       required:
@@ -223,24 +241,6 @@ components:
           description: Cost per unit
         supplier:
           $ref: '#/components/schemas/SupplierShortRef'
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the worker
-        descriptor:
-          type: string
-          description: Display name of the worker
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
   securitySchemes:
     bearerAuth:
       type: http

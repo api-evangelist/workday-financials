@@ -68,11 +68,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   parameters:
     offset:
       name: offset
@@ -96,6 +91,11 @@ components:
         type: integer
         default: 20
         maximum: 100
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
     LedgerAccount:
       type: object

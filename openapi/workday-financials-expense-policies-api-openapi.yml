@@ -63,9 +63,6 @@ components:
       schema:
         type: integer
         default: 0
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   schemas:
     ExpensePolicy:
       type: object
@@ -89,6 +86,9 @@ components:
         requiresReceipt:
           type: boolean
           description: Whether receipts are required
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

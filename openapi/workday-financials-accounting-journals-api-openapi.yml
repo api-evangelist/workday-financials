@@ -63,9 +63,6 @@ components:
       schema:
         type: integer
         default: 0
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   schemas:
     AccountingJournal:
       type: object
@@ -82,6 +79,9 @@ components:
         active:
           type: boolean
           description: Whether the journal is active
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

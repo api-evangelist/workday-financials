@@ -104,32 +104,31 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    BadRequest:
-      description: The request was malformed or contained invalid data
   schemas:
-    ReportColumn:
+    ReportResult:
       type: object
       properties:
-        name:
+        reportName:
           type: string
-          description: Column name
-        label:
+          description: Name of the executed report
+        executedOn:
           type: string
-          description: Column display label
-        dataType:
-          type: string
-          enum:
-          - text
-          - numeric
-          - date
-          - boolean
-          - currency
-          description: Data type of the column
+          format: date-time
+          description: When the report was executed
+        totalRows:
+          type: integer
+          description: Total number of rows in the result
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportColumn'
+          description: Column definitions
+        rows:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Report data rows
     CustomReport:
       type: object
       properties:
@@ -156,38 +155,6 @@ components:
           type: string
           format: date-time
           description: When the custom report was created
-    ReportResult:
-      type: object
-      properties:
-        reportName:
-          type: string
-          description: Name of the executed report
-        executedOn:
-          type: string
-          format: date-time
-          description: When the report was executed
-        totalRows:
-          type: integer
-          description: Total number of rows in the result
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportColumn'
-          description: Column definitions
-        rows:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-          description: Report data rows
-    ReportExecutionRequest:
-      type: object
-      properties:
-        prompts:
-          type: object
-          additionalProperties:
-            type: string
-          description: Key-value pairs of prompt parameter names and values
     WorkerRef:
       type: object
       properties:
@@ -197,6 +164,32 @@ components:
         descriptor:
           type: string
           description: Display name of the worker
+    ReportColumn:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        label:
+          type: string
+          description: Column display label
+        dataType:
+          type: string
+          enum:
+          - text
+          - numeric
+          - date
+          - boolean
+          - currency
+          description: Data type of the column
+    ReportExecutionRequest:
+      type: object
+      properties:
+        prompts:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs of prompt parameter names and values
   parameters:
     offset:
       name: offset
@@ -220,6 +213,13 @@ components:
       description: Unique identifier of the resource (WID)
       schema:
         type: string
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid data
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

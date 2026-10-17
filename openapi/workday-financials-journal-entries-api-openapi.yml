@@ -195,37 +195,67 @@ paths:
           description: Workday tenant identifier
           default: your-tenant
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
-    BadRequest:
-      description: The request was malformed or contained invalid data
-  parameters:
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the resource (WID)
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 20
-        maximum: 100
   schemas:
+    JournalLine:
+      type: object
+      properties:
+        ledgerAccount:
+          $ref: '#/components/schemas/LedgerAccountRef'
+        debitAmount:
+          type: number
+          format: double
+          description: Debit amount for this line
+        creditAmount:
+          type: number
+          format: double
+          description: Credit amount for this line
+        memo:
+          type: string
+          description: Line-level memo
+        costCenter:
+          $ref: '#/components/schemas/CostCenterRef'
+    PeriodRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the accounting period
+        descriptor:
+          type: string
+          description: Display name of the period
+    JournalEntryCreate:
+      type: object
+      required:
+      - journalDate
+      - company
+      - lines
+      properties:
+        journalDate:
+          type: string
+          format: date
+          description: Date of the journal entry
+        description:
+          type: string
+          description: Description of the journal entry
+        company:
+          $ref: '#/components/schemas/CompanyRef'
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/JournalLine'
+          minItems: 2
+          description: Journal entry lines (minimum two for debit/credit)
+    WorkerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
     CostCenterRef:
       type: object
       properties:
@@ -235,15 +265,15 @@ components:
         descriptor:
           type: string
           description: Display name of the cost center
-    CurrencyRef:
+    LedgerAccountRef:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID of the currency
+          description: Workday ID of the ledger account
         descriptor:
           type: string
-          description: Currency code (e.g., USD, EUR)
+          description: Display name of the ledger account
     CompanyRef:
       type: object
       properties:
@@ -253,6 +283,15 @@ components:
         descriptor:
           type: string
           description: Display name of the company
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     JournalEntry:
       type: object
       properties:
@@ -305,75 +344,6 @@ components:
           type: string
           format: date-time
           description: When the journal entry was created
-    PeriodRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the accounting period
-        descriptor:
-          type: string
-          description: Display name of the period
-    JournalEntryCreate:
-      type: object
-      required:
-      - journalDate
-      - company
-      - lines
-      properties:
-        journalDate:
-          type: string
-          format: date
-          description: Date of the journal entry
-        description:
-          type: string
-          description: Description of the journal entry
-        company:
-          $ref: '#/components/schemas/CompanyRef'
-        currency:
-          $ref: '#/components/schemas/CurrencyRef'
-        lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/JournalLine'
-          minItems: 2
-          description: Journal entry lines (minimum two for debit/credit)
-    WorkerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the worker
-        descriptor:
-          type: string
-          description: Display name of the worker
-    LedgerAccountRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the ledger account
-        descriptor:
-          type: string
-          description: Display name of the ledger account
-    JournalLine:
-      type: object
-      properties:
-        ledgerAccount:
-          $ref: '#/components/schemas/LedgerAccountRef'
-        debitAmount:
-          type: number
-          format: double
-          description: Debit amount for this line
-        creditAmount:
-          type: number
-          format: double
-          description: Credit amount for this line
-        memo:
-          type: string
-          description: Line-level memo
-        costCenter:
-          $ref: '#/components/schemas/CostCenterRef'
     JournalEntry_2:
       type: object
       properties:
@@ -420,6 +390,36 @@ components:
           type: string
           format: date-time
           description: When the journal entry was created
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    BadRequest:
+      description: The request was malformed or contained invalid data
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

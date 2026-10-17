@@ -72,11 +72,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   parameters:
     offset:
       name: offset
@@ -100,16 +95,12 @@ components:
         type: integer
         default: 20
         maximum: 100
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
-    CompanyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the company
-        descriptor:
-          type: string
-          description: Display name of the company
     BankAccount:
       type: object
       properties:
@@ -147,6 +138,15 @@ components:
           description: Whether the account is active
         company:
           $ref: '#/components/schemas/CompanyRef'
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
     CurrencyRef:
       type: object
       properties:

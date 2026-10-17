@@ -78,12 +78,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   schemas:
+    CompanyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the company
+        descriptor:
+          type: string
+          description: Display name of the company
+    CustomerRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the customer
+        descriptor:
+          type: string
+          description: Display name of the customer
     CustomerInvoice:
       type: object
       properties:
@@ -120,24 +133,6 @@ components:
           description: Current invoice status
         company:
           $ref: '#/components/schemas/CompanyRef'
-    CustomerRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the customer
-        descriptor:
-          type: string
-          description: Display name of the customer
-    CompanyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the company
-        descriptor:
-          type: string
-          description: Display name of the company
     CurrencyRef:
       type: object
       properties:
@@ -170,6 +165,11 @@ components:
         type: integer
         default: 20
         maximum: 100
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

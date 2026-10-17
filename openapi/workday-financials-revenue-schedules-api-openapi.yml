@@ -67,11 +67,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   parameters:
     offset:
       name: offset
@@ -95,6 +90,11 @@ components:
         type: integer
         default: 20
         maximum: 100
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   schemas:
     ContractRef:
       type: object
@@ -105,6 +105,15 @@ components:
         descriptor:
           type: string
           description: Display name of the contract
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
     RevenueSchedule:
       type: object
       properties:
@@ -130,15 +139,6 @@ components:
           - Recognized
           - Reversed
           description: Schedule status
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
   securitySchemes:
     bearerAuth:
       type: http

@@ -68,10 +68,16 @@ components:
         type: integer
         default: 20
         maximum: 100
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   schemas:
+    PeriodRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the accounting period
+        descriptor:
+          type: string
+          description: Display name of the period
     TrialBalanceEntry:
       type: object
       properties:
@@ -96,15 +102,6 @@ components:
           description: Net balance amount
         currency:
           $ref: '#/components/schemas/CurrencyRef'
-    PeriodRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the accounting period
-        descriptor:
-          type: string
-          description: Display name of the period
     LedgerAccountRef:
       type: object
       properties:
@@ -123,6 +120,9 @@ components:
         descriptor:
           type: string
           description: Currency code (e.g., USD, EUR)
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

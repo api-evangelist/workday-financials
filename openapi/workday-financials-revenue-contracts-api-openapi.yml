@@ -104,11 +104,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
   parameters:
     offset:
       name: offset
@@ -142,15 +137,38 @@ components:
         descriptor:
           type: string
           description: Display name of the customer
-    CompanyRef:
+    PerformanceObligation:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID of the company
-        descriptor:
+          description: Workday ID (WID) for the performance obligation
+        name:
           type: string
-          description: Display name of the company
+          description: Name of the performance obligation
+        transactionPrice:
+          type: number
+          format: double
+          description: Allocated transaction price
+        satisfactionMethod:
+          type: string
+          enum:
+          - OverTime
+          - PointInTime
+          description: How the obligation is satisfied
+        percentComplete:
+          type: number
+          format: double
+          description: Percentage of obligation completed
+          minimum: 0
+          maximum: 100
+        status:
+          type: string
+          enum:
+          - Open
+          - Satisfied
+          - Canceled
+          description: Current obligation status
     RevenueContract:
       type: object
       properties:
@@ -192,38 +210,15 @@ components:
           description: Revenue recognition standard applied
         company:
           $ref: '#/components/schemas/CompanyRef'
-    PerformanceObligation:
+    CompanyRef:
       type: object
       properties:
         id:
           type: string
-          description: Workday ID (WID) for the performance obligation
-        name:
+          description: Workday ID of the company
+        descriptor:
           type: string
-          description: Name of the performance obligation
-        transactionPrice:
-          type: number
-          format: double
-          description: Allocated transaction price
-        satisfactionMethod:
-          type: string
-          enum:
-          - OverTime
-          - PointInTime
-          description: How the obligation is satisfied
-        percentComplete:
-          type: number
-          format: double
-          description: Percentage of obligation completed
-          minimum: 0
-          maximum: 100
-        status:
-          type: string
-          enum:
-          - Open
-          - Satisfied
-          - Canceled
-          description: Current obligation status
+          description: Display name of the company
     CurrencyRef:
       type: object
       properties:
@@ -233,6 +228,11 @@ components:
         descriptor:
           type: string
           description: Currency code (e.g., USD, EUR)
+  responses:
+    NotFound:
+      description: The requested resource was not found
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
   securitySchemes:
     bearerAuth:
       type: http

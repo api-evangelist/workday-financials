@@ -73,13 +73,21 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    resourceId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the resource (WID)
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found
-    Unauthorized:
-      description: Authentication credentials are missing or invalid
     BadRequest:
       description: The request was malformed or contained invalid data
+    Unauthorized:
+      description: Authentication credentials are missing or invalid
+    NotFound:
+      description: The requested resource was not found
   schemas:
     CostCenterRef:
       type: object
@@ -90,6 +98,49 @@ components:
         descriptor:
           type: string
           description: Display name of the cost center
+    ExpenseItemCreate:
+      type: object
+      required:
+      - expenseItemType
+      - amount
+      - date
+      properties:
+        expenseItemType:
+          type: string
+          description: Type of expense
+        amount:
+          type: number
+          format: double
+          description: Expense amount
+        currency:
+          $ref: '#/components/schemas/CurrencyRef'
+        date:
+          type: string
+          format: date
+          description: Date the expense was incurred
+        memo:
+          type: string
+          description: Description of the expense
+        receipt:
+          $ref: '#/components/schemas/ReceiptRef'
+    CurrencyRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the currency
+        descriptor:
+          type: string
+          description: Currency code (e.g., USD, EUR)
+    ReceiptRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the receipt
+        descriptor:
+          type: string
+          description: Display name of the receipt
     ExpenseItem:
       type: object
       properties:
@@ -116,57 +167,6 @@ components:
           $ref: '#/components/schemas/ReceiptRef'
         costCenter:
           $ref: '#/components/schemas/CostCenterRef'
-    ExpenseItemCreate:
-      type: object
-      required:
-      - expenseItemType
-      - amount
-      - date
-      properties:
-        expenseItemType:
-          type: string
-          description: Type of expense
-        amount:
-          type: number
-          format: double
-          description: Expense amount
-        currency:
-          $ref: '#/components/schemas/CurrencyRef'
-        date:
-          type: string
-          format: date
-          description: Date the expense was incurred
-        memo:
-          type: string
-          description: Description of the expense
-        receipt:
-          $ref: '#/components/schemas/ReceiptRef'
-    ReceiptRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the receipt
-        descriptor:
-          type: string
-          description: Display name of the receipt
-    CurrencyRef:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Workday ID of the currency
-        descriptor:
-          type: string
-          description: Currency code (e.g., USD, EUR)
-  parameters:
-    resourceId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the resource (WID)
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
